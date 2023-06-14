@@ -8,7 +8,7 @@ import {
   type Formatted,
   defineFormatter,
 } from './format.js'
-import { formatTransaction } from './transaction.js'
+import { formatTransaction, type TransactionFormatter } from './transaction.js'
 
 export type BlockFormatter<TChain extends Chain | undefined = Chain> =
   TChain extends Chain
@@ -19,11 +19,10 @@ export type FormattedBlock<
   TFormatter extends Formatter | undefined = Formatter,
 > = Formatted<TFormatter, Block>
 
-export function formatBlock(block: Partial<RpcBlock>) {
-  // TODO: Properly format transactions with a custom formatter
+export function formatBlock(block: Partial<RpcBlock>, transactionFormatter: TransactionFormatter = formatTransaction): FormattedBlock {
   const transactions = block.transactions?.map((transaction) => {
     if (typeof transaction === 'string') return transaction
-    return formatTransaction(transaction)
+    return transactionFormatter(transaction)
   })
   return {
     ...block,

@@ -102,7 +102,12 @@ export async function getBlock<
 
   if (!block) throw new BlockNotFoundError({ blockHash, blockNumber })
 
+  const blockFormatter: BlockFormatter<TChain> = (_block: Partial<RpcBlock>) => (
+    formatBlock(_block, client.chain?.formatters?.transaction)
+  )
+
+
   return format(block, {
-    formatter: client.chain?.formatters?.block || formatBlock,
+    formatter: client.chain?.formatters?.block || blockFormatter
   })
 }
