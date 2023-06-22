@@ -263,7 +263,7 @@ function parseTransactionLegacy(
   return transaction
 }
 
-function parseAccessList(accessList_: RecursiveArray<Hex>): AccessList {
+export function parseAccessList(accessList_: RecursiveArray<Hex>): AccessList {
   const accessList: AccessList = []
   for (let i = 0; i < accessList_.length; i++) {
     const [address, storageKeys] = accessList_[i] as [Hex, Hex[]]
