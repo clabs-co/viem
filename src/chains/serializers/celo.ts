@@ -1,9 +1,4 @@
-import type { Address } from 'abitype'
-
-import { InvalidAddressError } from '../../errors/address.js'
 import { BaseError } from '../../errors/base.js'
-import { InvalidChainIdError } from '../../errors/chain.js'
-import { FeeCapTooHighError, TipAboveFeeCapError } from '../../errors/node.js'
 import type { FeeValuesEIP1559 } from '../../types/fee.js'
 import type { Signature } from '../../types/misc.js'
 import type {
@@ -11,16 +6,21 @@ import type {
   TransactionSerializable,
   TransactionSerializableBase,
 } from '../../types/transaction.js'
-import { isAddress } from '../../utils/address/isAddress.js'
 import { concatHex } from '../../utils/data/concat.js'
 import { trim } from '../../utils/data/trim.js'
 import { toHex } from '../../utils/encoding/toHex.js'
 import { toRlp } from '../../utils/encoding/toRlp.js'
+import {
+  assertAddress,
+  assertChainNumberValid,
+  assertMaxGasFees,
+} from '../../utils/transaction/assertArgsHelpers.js'
 import { serializeAccessList } from '../../utils/transaction/serializeAccessList.js'
 import {
   type SerializeTransactionFn,
   serializeTransaction as serializeTransaction_,
 } from '../../utils/transaction/serializeTransaction.js'
+import type { Address } from 'abitype'
 
 export const serializeTransaction: SerializeTransactionFn<
   TransactionSerializableCelo
@@ -139,37 +139,22 @@ function couldBeCIP42(tx: TransactionSerializableCelo) {
   return false
 }
 
-// maxFeePerGas must be less than 2^256 - 1: however writing like that caused exceptions to be raised
-const MAX_MAX_FEE_PER_GAS =
-  115792089237316195423570985008687907853269984665640564039457584007913129639935n
-
 function assertTransactionCIP42(transaction: TransactionSerializableCIP42) {
   const {
     chainId,
-    maxPriorityFeePerGas,
     gasPrice,
-    maxFeePerGas,
     to,
     feeCurrency,
     gatewayFee,
     gatewayFeeRecipient,
   } = transaction
-  if (chainId <= 0) throw new InvalidChainIdError({ chainId })
-  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to })
+  assertChainNumberValid(chainId)
+  assertAddress(to)
+  assertMaxGasFees(transaction)
   if (gasPrice)
     throw new BaseError(
       '`gasPrice` is not a valid CIP-42 Transaction attribute.',
     )
-
-  if (maxFeePerGas && maxFeePerGas > MAX_MAX_FEE_PER_GAS)
-    throw new FeeCapTooHighError({ maxFeePerGas })
-
-  if (
-    maxPriorityFeePerGas &&
-    maxFeePerGas &&
-    maxPriorityFeePerGas > maxFeePerGas
-  )
-    throw new TipAboveFeeCapError({ maxFeePerGas, maxPriorityFeePerGas })
 
   if (
     (gatewayFee && !gatewayFeeRecipient) ||

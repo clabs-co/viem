@@ -1,10 +1,8 @@
 import { parseAccount } from '../../accounts/utils/parseAccount.js'
 import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction.js'
-import { InvalidAddressError } from '../../errors/address.js'
-import { FeeCapTooHighError, TipAboveFeeCapError } from '../../errors/node.js'
 import { FeeConflictError } from '../../errors/transaction.js'
 import type { Chain } from '../../types/chain.js'
-import { isAddress } from '../address/isAddress.js'
+import { assertAddress, assertMaxGasFees } from './assertArgsHelpers.js'
 
 export type AssertRequestParameters = Partial<SendTransactionParameters<Chain>>
 
@@ -17,9 +15,8 @@ export function assertRequest(args: AssertRequestParameters) {
     to,
   } = args
   const account = account_ ? parseAccount(account_) : undefined
-  if (account && !isAddress(account.address))
-    throw new InvalidAddressError({ address: account.address })
-  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to })
+  assertAddress(account?.address)
+  assertAddress(to)
   if (
     typeof gasPrice !== 'undefined' &&
     (typeof maxFeePerGas !== 'undefined' ||
@@ -27,12 +24,5 @@ export function assertRequest(args: AssertRequestParameters) {
   )
     throw new FeeConflictError()
 
-  if (maxFeePerGas && maxFeePerGas > 2n ** 256n - 1n)
-    throw new FeeCapTooHighError({ maxFeePerGas })
-  if (
-    maxPriorityFeePerGas &&
-    maxFeePerGas &&
-    maxPriorityFeePerGas > maxFeePerGas
-  )
-    throw new TipAboveFeeCapError({ maxFeePerGas, maxPriorityFeePerGas })
+  assertMaxGasFees({ maxFeePerGas, maxPriorityFeePerGas })
 }
