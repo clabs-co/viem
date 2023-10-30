@@ -233,7 +233,6 @@ export type TransactionSerializableCIP42<
 > = TransactionSerializableBase<TQuantity, TIndex> &
   FeeValuesEIP1559<TQuantity> & {
     accessList?: AccessList
-    gasPrice?: never
     feeCurrency?: Address
     gatewayFeeRecipient?: Address
     gatewayFee?: TQuantity
@@ -247,7 +246,6 @@ export type TransactionSerializableCIP64<
 > = TransactionSerializableBase<TQuantity, TIndex> &
   FeeValuesEIP1559<TQuantity> & {
     accessList?: AccessList
-    gasPrice?: never
     feeCurrency?: Address
     chainId: number
     type?: 'cip64'
