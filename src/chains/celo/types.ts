@@ -111,7 +111,7 @@ export type CeloTransactionRequest =
 export type CeloTransactionSerializable =
   | TransactionSerializableCIP42
   | TransactionSerializableCIP64
-  | TransactionSerializable
+  | CeloTransactionSerializableBase
 
 export type CeloTransactionSerialized<
   TType extends CeloTransactionType = 'legacy',
@@ -247,9 +247,17 @@ export type TransactionSerializableCIP64<
   FeeValuesEIP1559<TQuantity> & {
     accessList?: AccessList
     feeCurrency?: Address
+    gatewayFee?: undefined
+    gatewayFeeRecipient?: undefined
     chainId: number
     type?: 'cip64'
   }
+
+export type CeloTransactionSerializableBase = TransactionSerializable & {
+  feeCurrency?: undefined
+  gatewayFee?: undefined
+  gatewayFeeRecipient?: undefined
+}
 
 export type TransactionSerializedCIP42 = `0x7c${string}`
 export type TransactionSerializedCIP64 = `0x7b${string}`

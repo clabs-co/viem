@@ -45,37 +45,31 @@ export function isEIP1559(
 export function isCIP42(
   transaction: CeloTransactionSerializable | CeloTransactionRequest,
 ): transaction is TransactionSerializableCIP42 {
-  const tx = transaction as TransactionSerializableCIP42
-
   // Enable end-user to force the tx to be considered as a cip42
-  if (tx.type === 'cip42') {
+  if (transaction.type === 'cip42') {
     return true
   }
 
   return (
     isEIP1559(transaction) &&
-    (isPresent(tx.feeCurrency) ||
-      isPresent(tx.gatewayFeeRecipient) ||
-      isPresent(tx.gatewayFee))
+    (isPresent(transaction.feeCurrency) ||
+      isPresent(transaction.gatewayFeeRecipient) ||
+      isPresent(transaction.gatewayFee))
   )
 }
 
 export function isCIP64(
   transaction: CeloTransactionSerializable | CeloTransactionRequest,
 ): transaction is TransactionSerializableCIP64 {
-  const tx = transaction as TransactionSerializableCIP64
-
   // Enable end-user to force the tx to be considered as a cip64
-  if (tx.type === 'cip64') {
+  if (transaction.type === 'cip64') {
     return true
   }
 
   return (
     isEIP1559(transaction) &&
-    isPresent(tx.feeCurrency) &&
-    // @ts-expect-error Property 'gatewayFee' does not exist on type 'TransactionSerializableCIP64'
-    isEmpty(tx.gatewayFee) &&
-    // @ts-expect-error Property 'gatewayFeeRecipient' does not exist on type 'TransactionSerializableCIP64'
-    isEmpty(tx.gatewayFeeRecipient)
+    isPresent(transaction.feeCurrency) &&
+    isEmpty(transaction.gatewayFee) &&
+    isEmpty(transaction.gatewayFeeRecipient)
   )
 }

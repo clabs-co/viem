@@ -25,7 +25,7 @@ import type {
 import { isCIP42, isCIP64, isEmpty, isPresent } from './utils.js'
 
 export const serializeTransactionCelo: SerializeTransactionFn<
-  CeloTransactionSerializable
+  CeloTransactionSerializable | TransactionSerializable
 > = (tx, signature) => {
   if (isCIP64(tx)) {
     return serializeTransactionCIP64(tx, signature)
