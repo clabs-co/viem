@@ -237,7 +237,7 @@ export function assertTransactionCIP64(
     )
   }
 
-  if (!feeCurrency) {
+  if (isEmpty(feeCurrency)) {
     throw new BaseError(
       '`feeCurrency` must be provided for CIP-64 transactions.',
     )

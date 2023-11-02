@@ -231,7 +231,7 @@ export type TransactionSerializableCIP42<
   TQuantity = bigint,
   TIndex = number,
 > = TransactionSerializableBase<TQuantity, TIndex> &
-  FeeValuesEIP1559<TQuantity> & {
+  Partial<FeeValuesEIP1559<TQuantity>> & {
     accessList?: AccessList
     feeCurrency?: Address
     gatewayFeeRecipient?: Address
@@ -244,7 +244,7 @@ export type TransactionSerializableCIP64<
   TQuantity = bigint,
   TIndex = number,
 > = TransactionSerializableBase<TQuantity, TIndex> &
-  FeeValuesEIP1559<TQuantity> & {
+  Partial<FeeValuesEIP1559<TQuantity>> & {
     accessList?: AccessList
     feeCurrency?: Address
     gatewayFee?: undefined

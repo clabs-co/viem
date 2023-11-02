@@ -147,7 +147,6 @@ describe('cip42', () => {
   test('args: maxFeePerGas (absent)', () => {
     const transaction: TransactionSerializableCIP42 = {
       ...baseCip42,
-      // @ts-expect-error
       maxFeePerGas: undefined,
       type: 'cip42',
     }
@@ -162,7 +161,6 @@ describe('cip42', () => {
   test('args: maxPriorityFeePerGas (absent)', () => {
     const transaction: TransactionSerializableCIP42 = {
       ...baseCip42,
-      // @ts-expect-error
       maxPriorityFeePerGas: undefined,
       type: 'cip42',
     }
@@ -354,7 +352,6 @@ describe('cip64', () => {
     const transaction: TransactionSerializableCIP64 = {
       ...baseCip64,
       type: 'cip64',
-      // @ts-expect-error
       maxFeePerGas: undefined,
     }
     expect(parseTransactionCelo(serializeTransactionCelo(transaction))).toEqual(
@@ -369,7 +366,6 @@ describe('cip64', () => {
     const transaction: TransactionSerializableCIP64 = {
       ...baseCip64,
       type: 'cip64',
-      // @ts-expect-error
       maxPriorityFeePerGas: undefined,
     }
     expect(parseTransactionCelo(serializeTransactionCelo(transaction))).toEqual(
