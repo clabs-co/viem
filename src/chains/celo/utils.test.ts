@@ -1,7 +1,9 @@
-import { describe, expect, test } from 'vitest'
+import { randomBytes } from 'crypto'
+import type { Address } from 'abitype'
+import { beforeEach, describe, expect, test } from 'vitest'
 import { isCIP42, isCIP64, isEIP1559, isEmpty, isPresent } from './utils.js'
 
-const mockAddress = '0x0000000000000000000000000000000000000001'
+let mockAddress: Address
 
 const emptyValues: any[] = [
   '0x000000',
@@ -26,6 +28,10 @@ const exampleNonEmptyValues: any[] = [
   '1',
   'example-string',
 ]
+
+beforeEach(() => {
+  mockAddress = `0x${randomBytes(20).toString('hex')}`
+})
 
 describe('isEmpty', () => {
   test('it checks for empty values', () => {
@@ -69,8 +75,6 @@ describe('isPresent', () => {
 
 describe('isEIP1559', () => {
   test('it checks if a transaction is EIP-1159', () => {
-    const mockAddress = '0x0000000000000000000000000000000000000001'
-
     expect(isEIP1559({})).toBe(false)
 
     expect(
