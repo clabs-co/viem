@@ -74,7 +74,7 @@ describe('isPresent', () => {
 })
 
 describe('isEIP1559', () => {
-  test('it checks if a transaction is EIP-1159', () => {
+  test('it checks if a transaction is EIP-1559', () => {
     expect(isEIP1559({})).toBe(false)
 
     expect(
@@ -118,7 +118,7 @@ describe('isEIP1559', () => {
 })
 
 describe('isCIP42', () => {
-  test('it allows forcing the type even if transaction is not EIP-1159', () => {
+  test('it allows forcing the type even if transaction is not EIP-1559', () => {
     expect(
       isCIP42({
         type: 'cip42',
@@ -203,7 +203,7 @@ describe('isCIP42', () => {
 })
 
 describe('isCIP64', () => {
-  test('it allows forcing the type even if transaction is not EIP-1159', () => {
+  test('it allows forcing the type even if transaction is not EIP-1559', () => {
     expect(
       isCIP64({
         type: 'cip64',
