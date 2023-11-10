@@ -1,4 +1,5 @@
 import type { Address } from 'abitype'
+import { randomBytes } from 'crypto'
 import { trim } from '../../utils/data/trim.js'
 import type {
   CeloTransactionRequest,
@@ -69,4 +70,8 @@ export function isCIP64(
     isEmpty(transaction.gatewayFee) &&
     isEmpty(transaction.gatewayFeeRecipient)
   )
+}
+
+export function generateRandomAddress(): Address {
+  return `0x${randomBytes(20).toString('hex')}` as Address
 }
