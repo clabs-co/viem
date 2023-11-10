@@ -236,6 +236,30 @@ describe('isCIP64', () => {
     ).toBe(true)
   })
 
+  test('it recognizes valid CIP-64 with "eip1559" type provided', () => {
+    expect(
+      isCIP64({
+        type: 'eip1559',
+        feeCurrency: mockAddress,
+        gatewayFeeRecipient: '0x',
+        gatewayFee: 0n,
+        maxFeePerGas: 123n,
+        maxPriorityFeePerGas: 456n,
+        from: mockAddress,
+      }),
+    ).toBe(true)
+
+    expect(
+      isCIP64({
+        type: 'eip1559',
+        feeCurrency: mockAddress,
+        maxFeePerGas: 123n,
+        maxPriorityFeePerGas: 456n,
+        from: mockAddress,
+      }),
+    ).toBe(true)
+  })
+
   test('it does not recognize valid CIP-64', () => {
     expect(isCIP64({})).toBe(false)
 
