@@ -11,53 +11,57 @@ import {
 import { celo } from '../index.js'
 
 describe('sendTransaction()', () => {
-  test('provides valid transaction params to sign for eth_sendRawTransaction (local account) for CIP-64', async () => {
-    // We need a local account
-    const account = privateKeyToAccount(accounts[0].privateKey)
-    const feeCurrencyAddress = '0x0000000000000000000000000000000000000fee'
-    const transactionHash = '0xtransaction-hash'
-    const toAddress = account.address
-    const transportRequestMock = vi.fn(async (request) => {
-      if (request.method === 'eth_chainId') {
-        return celo.id
+  // We need a local account
+  const account = privateKeyToAccount(accounts[0].privateKey)
+  const toAddress = account.address
+  const transactionHash = '0xtransaction-hash'
+  const feeCurrencyAddress = '0x0000000000000000000000000000000000000fee'
+  const transportRequestMock = vi.fn(async (request) => {
+    if (request.method === 'eth_chainId') {
+      return celo.id
+    }
+
+    if (request.method === 'eth_getBlockByNumber') {
+      // We just need baseFeePerGas for gas estimation
+      return {
+        baseFeePerGas: '0x12a05f200',
       }
+    }
 
-      if (request.method === 'eth_getBlockByNumber') {
-        // We just need baseFeePerGas for gas estimation
-        return {
-          baseFeePerGas: '0x12a05f200',
-        }
-      }
+    if (request.method === 'eth_maxPriorityFeePerGas') {
+      return 1n
+    }
 
-      if (request.method === 'eth_estimateGas') {
-        return 1n
-      }
+    if (request.method === 'eth_estimateGas') {
+      return 1n
+    }
 
-      if (request.method === 'eth_getTransactionCount') {
-        return 0
-      }
+    if (request.method === 'eth_getTransactionCount') {
+      return 0
+    }
 
-      if (request.method === 'eth_sendRawTransaction') {
-        return transactionHash
-      }
+    if (request.method === 'eth_sendRawTransaction') {
+      return transactionHash
+    }
 
-      return null
-    }) as EIP1193RequestFn<WalletRpcSchema & PublicRpcSchema>
+    return null
+  }) as EIP1193RequestFn<WalletRpcSchema & PublicRpcSchema>
 
-    const mockTransport = () =>
-      createTransport({
-        key: 'mock',
-        name: 'Mock Transport',
-        request: transportRequestMock,
-        type: 'mock',
-      })
-
-    const client = createWalletClient({
-      transport: mockTransport,
-      chain: celo,
-      account,
+  const mockTransport = () =>
+    createTransport({
+      key: 'mock',
+      name: 'Mock Transport',
+      request: transportRequestMock,
+      type: 'mock',
     })
 
+  const client = createWalletClient({
+    transport: mockTransport,
+    chain: celo,
+    account,
+  })
+
+  test('provides valid transaction params to sign for eth_sendRawTransaction (local account) for CIP-64', async () => {
     const hash = await client.sendTransaction({
       value: 1n,
       to: toAddress,
@@ -76,56 +80,6 @@ describe('sendTransaction()', () => {
   })
 
   test('provides valid transaction params to sign for eth_sendRawTransaction (local account) for CIP-42', async () => {
-    const account = privateKeyToAccount(accounts[0].privateKey)
-    const feeCurrencyAddress = '0x0000000000000000000000000000000000000fee'
-    const transactionHash = '0xtransaction-hash'
-    const toAddress = account.address
-    const transportRequestMock = vi.fn(async (request) => {
-      if (request.method === 'eth_chainId') {
-        return celo.id
-      }
-
-      if (request.method === 'eth_getBlockByNumber') {
-        // We just need baseFeePerGas for gas estimation
-        return {
-          baseFeePerGas: '0x12a05f200',
-        }
-      }
-
-      if (request.method === 'eth_getTransactionCount') {
-        return 0
-      }
-
-      if (request.method === 'eth_maxPriorityFeePerGas') {
-        return 1n
-      }
-
-      if (request.method === 'eth_estimateGas') {
-        return 1n
-      }
-
-      if (request.method === 'eth_sendRawTransaction') {
-        return transactionHash
-      }
-
-      return null
-    }) as EIP1193RequestFn<WalletRpcSchema & PublicRpcSchema>
-
-    const mockTransport = () =>
-      createTransport({
-        key: 'mock',
-        name: 'Mock Transport',
-        request: transportRequestMock,
-        type: 'mock',
-      })
-
-    const client = createWalletClient({
-      transport: mockTransport,
-      chain: celo,
-      // We need a local account
-      account,
-    })
-
     const hash = await client.sendTransaction({
       value: 1n,
       to: toAddress,
