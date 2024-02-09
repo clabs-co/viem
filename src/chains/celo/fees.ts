@@ -27,9 +27,10 @@ export const fees = {
       }
     }
     return internal_estimateFeesPerGas(params.client, {
-      ...params,
+      chain: params.client.chain,
+      type: params.type,
       skipChainEstimator: true,
-    } as any)
+    })
   },
 } satisfies ChainFees<typeof formatters>
 
@@ -43,7 +44,6 @@ async function estimateFeePerGasInFeeCurrency(
   client: Client,
   feeCurrency: Address,
 ) {
-  console.log('request', client.request)
   const fee = await client.request<RequestGasPriceInFeeCurrencyParams>({
     method: 'eth_gasPrice',
     params: [feeCurrency],
@@ -61,7 +61,6 @@ async function estimateMaxPriorityFeePerGasInFeeCurrency(
   client: Client,
   feeCurrency: Address,
 ) {
-  console.log('request', client.request)
   const feesPerGas =
     await client.request<RequestMaxGasPriceInFeeCurrencyParams>({
       method: 'eth_maxPriorityFeePerGas',
