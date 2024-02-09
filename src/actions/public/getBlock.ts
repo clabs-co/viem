@@ -13,12 +13,12 @@ import type { RpcBlock } from '../../types/rpc.js'
 import type { Prettify } from '../../types/utils.js'
 import type { RequestErrorType } from '../../utils/buildRequest.js'
 import {
-  numberToHex,
   type NumberToHexErrorType,
+  numberToHex,
 } from '../../utils/encoding/toHex.js'
 import {
-  formatBlock,
   type FormattedBlock,
+  formatBlock,
 } from '../../utils/formatters/block.js'
 
 export type GetBlockParameters<

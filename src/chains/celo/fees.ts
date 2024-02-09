@@ -26,7 +26,10 @@ export const fees = {
         maxPriorityFeePerGas,
       }
     }
-    return internal_estimateFeesPerGas(params.client, {...params, skipChainEstimator: true} as any, )
+    return internal_estimateFeesPerGas(params.client, {
+      ...params,
+      skipChainEstimator: true,
+    } as any)
   },
 } satisfies ChainFees<typeof formatters>
 

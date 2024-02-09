@@ -2,8 +2,8 @@ import type { Client } from '../../clients/createClient.js'
 import type { Transport } from '../../clients/transports/createTransport.js'
 import {
   BaseFeeScalarError,
-  Eip1559FeesNotSupportedError,
   type BaseFeeScalarErrorType,
+  Eip1559FeesNotSupportedError,
   type Eip1559FeesNotSupportedErrorType,
 } from '../../errors/fee.js'
 import type { ErrorType } from '../../errors/utils.js'
@@ -22,11 +22,11 @@ import type {
 import { getAction } from '../../utils/getAction.js'
 import type { PrepareTransactionRequestParameters } from '../wallet/prepareTransactionRequest.js'
 import {
-  internal_estimateMaxPriorityFeePerGas,
   type EstimateMaxPriorityFeePerGasErrorType,
+  internal_estimateMaxPriorityFeePerGas,
 } from './estimateMaxPriorityFeePerGas.js'
 import { getBlock } from './getBlock.js'
-import { getGasPrice, type GetGasPriceErrorType } from './getGasPrice.js'
+import { type GetGasPriceErrorType, getGasPrice } from './getGasPrice.js'
 
 export type EstimateFeesPerGasParameters<
   chain extends Chain | undefined = Chain | undefined,
@@ -131,7 +131,10 @@ export async function internal_estimateFeesPerGas<
     ? block_
     : await getAction(client, getBlock, 'getBlock')({})
 
-  if (typeof chain?.fees?.estimateFeesPerGas === 'function' && !args.skipChainEstimator)
+  if (
+    typeof chain?.fees?.estimateFeesPerGas === 'function' &&
+    !args.skipChainEstimator
+  )
     return chain.fees.estimateFeesPerGas({
       block: block_ as Block,
       client,

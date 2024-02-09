@@ -1,9 +1,9 @@
 import { describe, expect, test, vi } from 'vitest'
 import { getBlock } from '~viem/actions/public/getBlock.js'
 import {
-  createPublicClient,
   http,
   type ChainEstimateFeesPerGasFnParameters,
+  createPublicClient,
 } from '~viem/index.js'
 import { celo } from '../index.js'
 import { fees } from './fees.js'
@@ -65,11 +65,11 @@ describe('celo/fees', () => {
 
       expect(client.request).toHaveBeenCalledWith({
         method: 'eth_gasPrice',
-        params: ['0x765DE816845861e75A25fCA122bb6898B8B1282a']
+        params: ['0x765DE816845861e75A25fCA122bb6898B8B1282a'],
       })
       expect(client.request).toHaveBeenCalledWith({
         method: 'eth_maxPriorityFeePerGas',
-        params: ['0x765DE816845861e75A25fCA122bb6898B8B1282a']
+        params: ['0x765DE816845861e75A25fCA122bb6898B8B1282a'],
       })
     })
   })
