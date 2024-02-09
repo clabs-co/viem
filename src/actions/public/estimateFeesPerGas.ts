@@ -2,8 +2,8 @@ import type { Client } from '../../clients/createClient.js'
 import type { Transport } from '../../clients/transports/createTransport.js'
 import {
   BaseFeeScalarError,
-  type BaseFeeScalarErrorType,
   Eip1559FeesNotSupportedError,
+  type BaseFeeScalarErrorType,
   type Eip1559FeesNotSupportedErrorType,
 } from '../../errors/fee.js'
 import type { ErrorType } from '../../errors/utils.js'
@@ -12,8 +12,8 @@ import type {
   Chain,
   ChainEstimateFeesPerGasFnParameters,
   ChainFeesFnParameters,
+  GetChainParameter,
 } from '../../types/chain.js'
-import type { GetChainParameter } from '../../types/chain.js'
 import type {
   FeeValuesEIP1559,
   FeeValuesLegacy,
@@ -22,11 +22,11 @@ import type {
 import { getAction } from '../../utils/getAction.js'
 import type { PrepareTransactionRequestParameters } from '../wallet/prepareTransactionRequest.js'
 import {
-  type EstimateMaxPriorityFeePerGasErrorType,
   internal_estimateMaxPriorityFeePerGas,
+  type EstimateMaxPriorityFeePerGasErrorType,
 } from './estimateMaxPriorityFeePerGas.js'
 import { getBlock } from './getBlock.js'
-import { type GetGasPriceErrorType, getGasPrice } from './getGasPrice.js'
+import { getGasPrice, type GetGasPriceErrorType } from './getGasPrice.js'
 
 export type EstimateFeesPerGasParameters<
   chain extends Chain | undefined = Chain | undefined,
@@ -100,6 +100,7 @@ export async function internal_estimateFeesPerGas<
   args: EstimateFeesPerGasParameters<chain, chainOverride, type> & {
     block?: Block
     request?: PrepareTransactionRequestParameters
+    skipChainEstimator?: boolean
   },
 ): Promise<EstimateFeesPerGasReturnType<type>> {
   const {
@@ -130,7 +131,7 @@ export async function internal_estimateFeesPerGas<
     ? block_
     : await getAction(client, getBlock, 'getBlock')({})
 
-  if (typeof chain?.fees?.estimateFeesPerGas === 'function')
+  if (typeof chain?.fees?.estimateFeesPerGas === 'function' && !args.skipChainEstimator)
     return chain.fees.estimateFeesPerGas({
       block: block_ as Block,
       client,
