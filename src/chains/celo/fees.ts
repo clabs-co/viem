@@ -1,13 +1,13 @@
-import type { Client } from '~viem/clients/createClient.js'
+import type { Client } from '../../clients/createClient.js'
 import {
   type Address,
   type Block,
   type ChainFees,
   type Hex,
   type PrepareTransactionRequestParameters,
-} from '~viem/index.js'
+} from '../../index.js'
 
-import { internal_estimateFeesPerGas } from '~viem/actions/public/estimateFeesPerGas.js'
+import { internal_estimateFeesPerGas } from '../../actions/public/estimateFeesPerGas.js'
 import { formatters } from './formatters.js'
 
 export const fees = {
