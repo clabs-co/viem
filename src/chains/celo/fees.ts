@@ -1,15 +1,23 @@
 import type { Client } from '~viem/clients/createClient.js'
-import { type Address, type ChainFees, type Hex } from '~viem/index.js'
+import { type Address, type Block, type ChainFees, type Hex, type PrepareTransactionRequestParameters } from '~viem/index.js'
 
 import { internal_estimateFeesPerGas } from '~viem/actions/public/estimateFeesPerGas.js'
 import { formatters } from './formatters.js'
 
 export const fees = {
+  /*
+   * Estimate the fees per gas for a transaction
+   * If the transaction is to be paid in a token, the fees are estimated in the value of the token
+   * otherwise the default estimateFeesPerGas is used.
+   *
+   * This method is called internally by estimateFeesPerGas
+   *
+   * @param parameters - {@link EstimateFeesPerGasParameters<typeof celo>}
+   *
+  */
   estimateFeesPerGas: async (params) => {
-    console.info('params', params)
     // When using token to pay for fees, we need to estimate the fees in the value of the token
     if (params.request?.feeCurrency) {
-      console.log('params.request.feeCurrency', params.request.feeCurrency)
       const [maxFeePerGas, maxPriorityFeePerGas] = await Promise.all([
         estimateFeePerGasInFeeCurrency(
           params.client,
@@ -27,7 +35,10 @@ export const fees = {
       }
     }
     return internal_estimateFeesPerGas(params.client, {
+      ...params,
+      block: params.block as Block,
       chain: params.client.chain,
+      request: params.request as PrepareTransactionRequestParameters,
       type: params.type,
       skipChainEstimator: true,
     })
@@ -39,7 +50,15 @@ type RequestGasPriceInFeeCurrencyParams = {
   Parameters: [Address]
   ReturnType: Hex
 }
+/*
+ * Estimate the fee per gas in the value of the fee token
 
+ *
+ * @param client - Client to use
+ * @param feeCurrency -  Address of a whitelisted fee token
+ * @returns The fee per gas in wei in the value of the  fee token
+ *
+ */
 async function estimateFeePerGasInFeeCurrency(
   client: Client,
   feeCurrency: Address,
@@ -57,6 +76,15 @@ type RequestMaxGasPriceInFeeCurrencyParams = {
   ReturnType: Hex
 }
 
+/*
+ * Estimate the max priority fee per gas in the value of the fee token
+
+ *
+ * @param client - Client to use
+ * @param feeCurrency -  Address of a whitelisted fee token
+ * @returns The fee per gas in wei in the value of the  fee token
+ *
+ */
 async function estimateMaxPriorityFeePerGasInFeeCurrency(
   client: Client,
   feeCurrency: Address,

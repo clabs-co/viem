@@ -1,9 +1,10 @@
 import { describe, expect, test, vi } from 'vitest'
 import { getBlock } from '~viem/actions/public/getBlock.js'
 import {
+  Eip1559FeesNotSupportedError,
+  createPublicClient,
   http,
   type ChainEstimateFeesPerGasFnParameters,
-  createPublicClient,
 } from '~viem/index.js'
 import { celo } from '../index.js'
 import { fees } from './fees.js'
@@ -34,6 +35,7 @@ const baseParams = {
 describe('celo/fees', () => {
   describe('estimateFeesPerGas()', () => {
     test('default', async () => {
+      vi.spyOn(client, 'request')
       const block = await getBlockWithRandomness()
       const params: ChainEstimateParams = {
         ...baseParams,
@@ -45,6 +47,16 @@ describe('celo/fees', () => {
         await fees.estimateFeesPerGas(params)
       expect(maxFeePerGas).toBeTypeOf('bigint')
       expect(maxPriorityFeePerGas).toBeTypeOf('bigint')
+      expect(client.request).toHaveBeenCalledWith({
+        method: 'eth_maxPriorityFeePerGas',
+      })
+    })
+
+    test('default (no baseFeePerGas)', async () => {
+      const block = await getBlockWithRandomness()
+      // @ts-expect-error -- how does one get the right kind of block?
+      expect(() => fees.estimateFeesPerGas({...baseParams, block: {...block, baseFeePerGas: null}}))
+      .toThrow(Eip1559FeesNotSupportedError)
     })
 
     test('feeCurrency', async () => {
@@ -77,6 +89,5 @@ describe('celo/fees', () => {
 
 async function getBlockWithRandomness() {
   const block = await getBlock(client)
-  console.log('block', block)
   return { ...block, randomness }
 }
