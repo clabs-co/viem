@@ -1,5 +1,11 @@
 import type { Client } from '~viem/clients/createClient.js'
-import { type Address, type Block, type ChainFees, type Hex, type PrepareTransactionRequestParameters } from '~viem/index.js'
+import {
+  type Address,
+  type Block,
+  type ChainFees,
+  type Hex,
+  type PrepareTransactionRequestParameters,
+} from '~viem/index.js'
 
 import { internal_estimateFeesPerGas } from '~viem/actions/public/estimateFeesPerGas.js'
 import { formatters } from './formatters.js'
@@ -14,7 +20,7 @@ export const fees = {
    *
    * @param parameters - {@link EstimateFeesPerGasParameters<typeof celo>}
    *
-  */
+   */
   estimateFeesPerGas: async (params) => {
     // When using token to pay for fees, we need to estimate the fees in the value of the token
     if (params.request?.feeCurrency) {

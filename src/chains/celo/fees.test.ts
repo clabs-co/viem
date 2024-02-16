@@ -1,10 +1,10 @@
 import { describe, expect, test, vi } from 'vitest'
 import { getBlock } from '~viem/actions/public/getBlock.js'
 import {
-  Eip1559FeesNotSupportedError,
-  createPublicClient,
   http,
   type ChainEstimateFeesPerGasFnParameters,
+  Eip1559FeesNotSupportedError,
+  createPublicClient,
 } from '~viem/index.js'
 import { celo } from '../index.js'
 import { fees } from './fees.js'
@@ -55,8 +55,12 @@ describe('celo/fees', () => {
     test('default (no baseFeePerGas)', async () => {
       const block = await getBlockWithRandomness()
       // @ts-expect-error -- how does one get the right kind of block?
-      expect(() => fees.estimateFeesPerGas({...baseParams, block: {...block, baseFeePerGas: null}}))
-      .toThrow(Eip1559FeesNotSupportedError)
+      expect(() =>
+        fees.estimateFeesPerGas({
+          ...baseParams,
+          block: { ...block, baseFeePerGas: null },
+        }),
+      ).toThrow(Eip1559FeesNotSupportedError)
     })
 
     test('feeCurrency', async () => {
