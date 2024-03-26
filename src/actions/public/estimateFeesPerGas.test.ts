@@ -6,13 +6,13 @@ import { createPublicClient } from '../../clients/createPublicClient.js'
 import { http } from '../../clients/transports/http.js'
 
 import { localHttpUrl } from '~test/src/constants.js'
+import { createTestClient } from '~viem/index.js'
 import {
   estimateFeesPerGas,
   internal_estimateFeesPerGas,
 } from './estimateFeesPerGas.js'
 import * as getBlock from './getBlock.js'
 import { getGasPrice } from './getGasPrice.js'
-import { createTestClient } from '~viem/index.js'
 
 test('default', async () => {
   const block = await getBlock.getBlock(publicClient)

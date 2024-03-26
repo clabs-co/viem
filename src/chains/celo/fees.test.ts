@@ -1,8 +1,5 @@
 import { describe, expect, test, vi } from 'vitest'
-import {
-  http,
-  createTestClient,
-} from '~viem/index.js'
+import { http, createTestClient } from '~viem/index.js'
 import { celo } from '../index.js'
 
 const client = createTestClient({
