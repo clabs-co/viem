@@ -12,6 +12,7 @@ import {
 } from './estimateFeesPerGas.js'
 import * as getBlock from './getBlock.js'
 import { getGasPrice } from './getGasPrice.js'
+import { createTestClient } from '~viem/index.js'
 
 test('default', async () => {
   const block = await getBlock.getBlock(publicClient)
@@ -29,6 +30,28 @@ test('legacy', async () => {
     getGasPrice(publicClient),
   ])
   expect(gasPrice).toBe((gasPrice_! * 120n) / 100n)
+})
+
+test('args: chain `estimateFeesPerGas` override (when null returned)', async () => {
+  const client = createTestClient({
+    transport: http(localHttpUrl),
+    mode: 'anvil',
+  })
+
+  const { maxFeePerGas, maxPriorityFeePerGas } = await estimateFeesPerGas(
+    client,
+    {
+      chain: {
+        ...anvilChain,
+        fees: {
+          estimateFeesPerGas: async () => null,
+        },
+      },
+    },
+  )
+
+  expect(maxFeePerGas).toBeDefined()
+  expect(maxPriorityFeePerGas).toBeDefined()
 })
 
 test('args: chain `estimateFeesPerGas` override', async () => {

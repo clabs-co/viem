@@ -1,16 +1,9 @@
 import type { Client } from '../../clients/createClient.js'
-import {
-  type Address,
-  type Block,
-  type ChainFees,
-  type Hex,
-  type PrepareTransactionRequestParameters,
-} from '../../index.js'
+import { type Address, type ChainFees, type Hex } from '../../index.js'
 
-import { internal_estimateFeesPerGas } from '../../actions/public/estimateFeesPerGas.js'
 import { formatters } from './formatters.js'
 
-export const fees = {
+export const fees: ChainFees<typeof formatters> = {
   /*
    * Estimate the fees per gas for a transaction
    * If the transaction is to be paid in a token, the fees are estimated in the value of the token
@@ -22,34 +15,24 @@ export const fees = {
    *
    */
   estimateFeesPerGas: async (params) => {
-    // When using token to pay for fees, we need to estimate the fees in the value of the token
-    if (params.request?.feeCurrency) {
-      const [maxFeePerGas, maxPriorityFeePerGas] = await Promise.all([
-        estimateFeePerGasInFeeCurrency(
-          params.client,
-          params.request.feeCurrency,
-        ),
-        estimateMaxPriorityFeePerGasInFeeCurrency(
-          params.client,
-          params.request.feeCurrency,
-        ),
-      ])
-
-      return {
-        maxFeePerGas,
-        maxPriorityFeePerGas,
-      }
+    if (!params.request?.feeCurrency) {
+      return null
     }
-    return internal_estimateFeesPerGas(params.client, {
-      ...params,
-      block: params.block as Block,
-      chain: params.client.chain,
-      request: params.request as PrepareTransactionRequestParameters,
-      type: params.type,
-      skipChainEstimator: true,
-    })
+
+    const [maxFeePerGas, maxPriorityFeePerGas] = await Promise.all([
+      estimateFeePerGasInFeeCurrency(params.client, params.request.feeCurrency),
+      estimateMaxPriorityFeePerGasInFeeCurrency(
+        params.client,
+        params.request.feeCurrency,
+      ),
+    ])
+
+    return {
+      maxFeePerGas,
+      maxPriorityFeePerGas,
+    }
   },
-} satisfies ChainFees<typeof formatters>
+}
 
 type RequestGasPriceInFeeCurrencyParams = {
   Method: 'eth_gasPrice'

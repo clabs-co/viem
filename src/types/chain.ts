@@ -130,7 +130,7 @@ export type ChainFees<
   estimateFeesPerGas?:
     | ((
         args: ChainEstimateFeesPerGasFnParameters<formatters>,
-      ) => Promise<EstimateFeesPerGasReturnType>)
+      ) => Promise<EstimateFeesPerGasReturnType | null>)
     | bigint
     | undefined
 }

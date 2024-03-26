@@ -100,7 +100,6 @@ export async function internal_estimateFeesPerGas<
   args: EstimateFeesPerGasParameters<chain, chainOverride, type> & {
     block?: Block
     request?: PrepareTransactionRequestParameters
-    skipChainEstimator?: boolean
   },
 ): Promise<EstimateFeesPerGasReturnType<type>> {
   const {
@@ -131,17 +130,19 @@ export async function internal_estimateFeesPerGas<
     ? block_
     : await getAction(client, getBlock, 'getBlock')({})
 
-  if (
-    typeof chain?.fees?.estimateFeesPerGas === 'function' &&
-    !args.skipChainEstimator
-  )
-    return chain.fees.estimateFeesPerGas({
+  if (typeof chain?.fees?.estimateFeesPerGas === 'function') {
+    const fees = (await chain.fees.estimateFeesPerGas({
       block: block_ as Block,
       client,
       multiply,
       request,
       type,
-    } as ChainEstimateFeesPerGasFnParameters) as unknown as EstimateFeesPerGasReturnType<type>
+    } as ChainEstimateFeesPerGasFnParameters)) as unknown as EstimateFeesPerGasReturnType<type>
+
+    if (fees !== null) {
+      return fees
+    }
+  }
 
   if (type === 'eip1559') {
     if (typeof block.baseFeePerGas !== 'bigint')
