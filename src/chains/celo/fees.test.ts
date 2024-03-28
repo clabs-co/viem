@@ -1,6 +1,7 @@
 import { describe, expect, test, vi } from 'vitest'
 import { http, createTestClient } from '~viem/index.js'
 import { celo } from '../index.js'
+import type { ChainEstimateFeesPerGasFn } from '~viem/types/chain.js'
 
 const client = createTestClient({
   transport: http(),
@@ -9,13 +10,15 @@ const client = createTestClient({
 })
 
 describe('celo/fees', () => {
+  const celoestimateFeesPerGasFn = celo.fees
+    .estimateFeesPerGas as ChainEstimateFeesPerGasFn
+
   test("doesn't call the client when feeCurrency is not provided", async () => {
     const requestMock = vi.spyOn(client, 'request')
 
     expect(celo.fees.estimateFeesPerGas).toBeTypeOf('function')
 
-    // @ts-ignore
-    const fees = await celo.fees.estimateFeesPerGas({
+    const fees = await celoestimateFeesPerGasFn({
       client,
       request: {},
     } as any)
@@ -37,8 +40,7 @@ describe('celo/fees', () => {
 
     expect(celo.fees.estimateFeesPerGas).toBeTypeOf('function')
 
-    // @ts-ignore
-    const fees = await celo.fees.estimateFeesPerGas({
+    const fees = await celoestimateFeesPerGasFn({
       client,
       request: {
         feeCurrency: '0xfee',
