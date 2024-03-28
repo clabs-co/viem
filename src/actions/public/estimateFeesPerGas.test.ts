@@ -50,8 +50,8 @@ test('args: chain `estimateFeesPerGas` override (when null returned)', async () 
     },
   )
 
-  expect(maxFeePerGas).toBeDefined()
-  expect(maxPriorityFeePerGas).toBeDefined()
+  expect(maxFeePerGas).toBeTypeOf('bigint')
+  expect(maxPriorityFeePerGas).toBeTypeOf('bigint')
 })
 
 test('args: chain `estimateFeesPerGas` override', async () => {
