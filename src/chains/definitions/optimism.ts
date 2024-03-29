@@ -1,5 +1,5 @@
+import { chainConfig } from '../../op-stack/chainConfig.js'
 import { defineChain } from '../../utils/chain/defineChain.js'
-import { chainConfig } from '../opStack/chainConfig.js'
 
 const sourceId = 1 // mainnet
 
@@ -17,7 +17,7 @@ export const optimism = /*#__PURE__*/ defineChain({
     default: {
       name: 'Optimism Explorer',
       url: 'https://optimistic.etherscan.io',
-      apiUrl: 'https://api-optimistic.etherscan.io',
+      apiUrl: 'https://api-optimistic.etherscan.io/api',
     },
   },
   contracts: {
@@ -34,6 +34,11 @@ export const optimism = /*#__PURE__*/ defineChain({
     portal: {
       [sourceId]: {
         address: '0xbEb5Fc579115071764c7423A4f12eDde41f106Ed',
+      },
+    },
+    l1StandardBridge: {
+      [sourceId]: {
+        address: '0x99C9fc46f92E8a1c0deC1b1747d010903E884bE1',
       },
     },
   },

@@ -4,9 +4,10 @@ export {
 } from './buildRequest.js'
 
 export {
-  type CcipFetchErrorType,
   type OffchainLookupErrorType,
-  ccipFetch,
+  ccipRequest,
+  /** @deprecated Use `ccipRequest`. */
+  ccipRequest as ccipFetch,
   offchainLookup,
   offchainLookupAbiItem,
   offchainLookupSignature,
@@ -348,6 +349,7 @@ export {
   type GetTransactionErrorReturnType,
   getTransactionError,
 } from './errors/getTransactionError.js'
+export { getAction } from './getAction.js'
 export {
   type DefineFormatterErrorType,
   defineFormatter,

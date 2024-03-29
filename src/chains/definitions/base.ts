@@ -1,5 +1,5 @@
+import { chainConfig } from '../../op-stack/chainConfig.js'
 import { defineChain } from '../../utils/chain/defineChain.js'
-import { chainConfig } from '../opStack/chainConfig.js'
 
 const sourceId = 1 // mainnet
 
@@ -34,6 +34,12 @@ export const base = /*#__PURE__*/ defineChain({
     portal: {
       [sourceId]: {
         address: '0x49048044D57e1C92A77f79988d21Fa8fAF74E97e',
+        blockCreated: 17482143,
+      },
+    },
+    l1StandardBridge: {
+      [sourceId]: {
+        address: '0x3154Cf16ccdb4C6d922629664174b904d80F2C35',
         blockCreated: 17482143,
       },
     },

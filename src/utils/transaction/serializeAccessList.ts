@@ -28,11 +28,11 @@ export type SerializeAccessListErrorType =
  * @returns Array of hex strings
  */
 export function serializeAccessList(
-  accessList?: AccessList,
+  accessList?: AccessList | undefined,
 ): RecursiveArray<Hex> {
   if (!accessList || accessList.length === 0) return []
 
-  const serializedAccessList: RecursiveArray<Hex> = []
+  const serializedAccessList = []
   for (let i = 0; i < accessList.length; i++) {
     const { address, storageKeys } = accessList[i]
 
@@ -42,7 +42,7 @@ export function serializeAccessList(
       }
     }
 
-    if (!isAddress(address)) {
+    if (!isAddress(address, { strict: false })) {
       throw new InvalidAddressError({ address })
     }
 

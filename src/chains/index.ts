@@ -1,31 +1,44 @@
 export type { Chain } from '../types/chain.js'
 
 export { acala } from './definitions/acala.js'
+export { ancient8 } from './definitions/ancient8.js'
+export { ancient8Sepolia } from './definitions/ancient8Sepolia.js'
+export { anvil } from './definitions/anvil.js'
+export { apexTestnet } from './definitions/apexTestnet.js'
 export { arbitrum } from './definitions/arbitrum.js'
 export { arbitrumGoerli } from './definitions/arbitrumGoerli.js'
 export { arbitrumNova } from './definitions/arbitrumNova.js'
 export { astar } from './definitions/astar.js'
+export { astarZkEVM } from './definitions/astarZkEVM.js'
+export { astarZkyoto } from './definitions/astarZkyoto.js'
 export { arbitrumSepolia } from './definitions/arbitrumSepolia.js'
+export { areonNetwork } from './definitions/areonNetwork.js'
+export { areonNetworkTestnet } from './definitions/areonNetworkTestnet.js'
 export { astarZkatana } from './definitions/astarZkatana.js'
 export { aurora } from './definitions/aurora.js'
 export { auroraTestnet } from './definitions/auroraTestnet.js'
+export { auroria } from './definitions/auroria.js'
 export { avalanche } from './definitions/avalanche.js'
 export { avalancheFuji } from './definitions/avalancheFuji.js'
 export { bahamut } from './definitions/bahamut.js'
 export { base } from './definitions/base.js'
 export { baseGoerli } from './definitions/baseGoerli.js'
 export { baseSepolia } from './definitions/baseSepolia.js'
+export { beam } from './definitions/beam.js'
+export { beamTestnet } from './definitions/beamTestnet.js'
 export { bearNetworkChainMainnet } from './definitions/bearNetworkChainMainnet.js'
 export { bearNetworkChainTestnet } from './definitions/bearNetworkChainTestnet.js'
 export { berachainTestnet } from './definitions/berachainTestnet.js'
 export { bitTorrent } from './definitions/bitTorrent.js'
 export { bitTorrentTestnet } from './definitions/bitTorrentTestnet.js'
+export { blast } from './definitions/blast.js'
 export { blastSepolia } from './definitions/blastSepolia.js'
 export { boba } from './definitions/boba.js'
 export { bronos } from './definitions/bronos.js'
 export { bronosTestnet } from './definitions/bronosTestnet.js'
 export { bsc } from './definitions/bsc.js'
 export { bscTestnet } from './definitions/bscTestnet.js'
+export { bscGreenfield } from './definitions/bscGreenfield.js'
 export { bxn } from './definitions/bxn.js'
 export { bxnTestnet } from './definitions/bxnTestnet.js'
 export { canto } from './definitions/canto.js'
@@ -47,6 +60,7 @@ export { edgeware } from './definitions/edgeware.js'
 export { edgewareTestnet } from './definitions/edgewareTestnet.js'
 export { eos } from './definitions/eos.js'
 export { eosTestnet } from './definitions/eosTestnet.js'
+export { etherlinkTestnet } from './definitions/etherlinkTestnet.js'
 export { evmos } from './definitions/evmos.js'
 export { evmosTestnet } from './definitions/evmosTestnet.js'
 export { ekta } from './definitions/ekta.js'
@@ -60,7 +74,12 @@ export { filecoinCalibration } from './definitions/filecoinCalibration.js'
 export { filecoinHyperspace } from './definitions/filecoinHyperspace.js'
 export { flare } from './definitions/flare.js'
 export { flareTestnet } from './definitions/flareTestnet.js'
+export { flowPreviewnet } from './definitions/flowPreviewnet.js'
+export { flowMainnet } from './definitions/flowMainnet.js'
+/** @deprecated Use `anvil` instead. */
 export { foundry } from './definitions/foundry.js'
+export { fraxtal } from './definitions/fraxtal.js'
+export { fraxtalTestnet } from './definitions/fraxtalTestnet.js'
 export { fuse } from './definitions/fuse.js'
 export { fuseSparknet } from './definitions/fuseSparknet.js'
 export { iotex } from './definitions/iotex.js'
@@ -79,6 +98,9 @@ export { hedera } from './definitions/hedera.js'
 export { hederaTestnet } from './definitions/hederaTestnet.js'
 export { hederaPreviewnet } from './definitions/hederaPreviewnet.js'
 export { holesky } from './definitions/holesky.js'
+export { immutableZkEvm } from './definitions/immutableZkEvm.js'
+export { immutableZkEvmTestnet } from './definitions/immutableZkEvmTestnet.js'
+export { kakarotSepolia } from './definitions/kakarotSepolia.js'
 export { kava } from './definitions/kava.js'
 export { kavaTestnet } from './definitions/kavaTestnet.js'
 export { kcc } from './definitions/kcc.js'
@@ -90,26 +112,33 @@ export { lightlinkPegasus } from './definitions/lightlinkPegasus.js'
 export { lightlinkPhoenix } from './definitions/lightlinkPhoenix.js'
 export { linea } from './definitions/linea.js'
 export { lineaTestnet } from './definitions/lineaTestnet.js'
+export { liskSepolia } from './definitions/liskSepolia.js'
 export { localhost } from './definitions/localhost.js'
 export { lukso } from './definitions/lukso.js'
+export { luksoTestnet } from './definitions/luksoTestnet.js'
 export { mainnet } from './definitions/mainnet.js'
 export { mandala } from './definitions/mandala.js'
 export { manta } from './definitions/manta.js'
 export { mantaTestnet } from './definitions/mantaTestnet.js'
 export { mantle } from './definitions/mantle.js'
 export { mantleTestnet } from './definitions/mantleTestnet.js'
+export { merlin } from './definitions/merlin.js'
 export { metachain } from './definitions/metachain.js'
+export { metachainIstanbul } from './definitions/metachainIstanbul.js'
 export { meter } from './definitions/meter.js'
 export { meterTestnet } from './definitions/meterTestnet.js'
 export { metis } from './definitions/metis.js'
 export { metisGoerli } from './definitions/metisGoerli.js'
 export { mev } from './definitions/mev.js'
 export { mevTestnet } from './definitions/mevTestnet.js'
+export { mintSepoliaTestnet } from './definitions/mintSepoliaTestnet.js'
+export { mode } from './definitions/mode.js'
 export { modeTestnet } from './definitions/modeTestnet.js'
 export { moonbaseAlpha } from './definitions/moonbaseAlpha.js'
 export { moonbeam } from './definitions/moonbeam.js'
 export { moonbeamDev } from './definitions/moonbeamDev.js'
 export { moonriver } from './definitions/moonriver.js'
+export { morphSepolia } from './definitions/morphSepolia.js'
 export { neonDevnet } from './definitions/neonDevnet.js'
 export { neonMainnet } from './definitions/neonMainnet.js'
 export { nexi } from './definitions/nexi.js'
@@ -127,8 +156,11 @@ export { palm } from './definitions/palm.js'
 export { palmTestnet } from './definitions/palmTestnet.js'
 export { pgn } from './definitions/pgn.js'
 export { pgnTestnet } from './definitions/pgnTestnet.js'
+export { phoenix } from './definitions/phoenix.js'
 export { plinga } from './definitions/plinga.js'
+export { plumeTestnet } from './definitions/plumeTestnet.js'
 export { polygon } from './definitions/polygon.js'
+export { polygonAmoy } from './definitions/polygonAmoy.js'
 export { polygonMumbai } from './definitions/polygonMumbai.js'
 export { polygonZkEvmTestnet } from './definitions/polygonZkEvmTestnet.js'
 export { polygonZkEvm } from './definitions/polygonZkEvm.js'
@@ -136,23 +168,26 @@ export { pulsechain } from './definitions/pulsechain.js'
 export { pulsechainV4 } from './definitions/pulsechainV4.js'
 export { qMainnet } from './definitions/qMainnet.js'
 export { qTestnet } from './definitions/qTestnet.js'
+export { reyaNetwork } from './definitions/reyaNetwork.js'
 export { rollux } from './definitions/rollux.js'
 export { rolluxTestnet } from './definitions/rolluxTestnet.js'
 export { ronin } from './definitions/ronin.js'
 export { rootstock } from './definitions/rootstock.js'
+export { rss3 } from './definitions/rss3.js'
+export { rss3Sepolia } from './definitions/rss3Sepolia.js'
 export { saigon } from './definitions/saigon.js'
 export { sapphire } from './definitions/sapphire.js'
 export { sapphireTestnet } from './definitions/sapphireTestnet.js'
 export { scroll } from './definitions/scroll.js'
 export { scrollSepolia } from './definitions/scrollSepolia.js'
 export { scrollTestnet } from './definitions/scrollTestnet.js'
+export { seiDevnet } from './definitions/seiDevnet.js'
 export { sepolia } from './definitions/sepolia.js'
 export { shimmer } from './definitions/shimmer.js'
 export { shimmerTestnet } from './definitions/shimmerTestnet.js'
 export { skaleBlockBrawlers } from './definitions/skale/brawl.js'
 export { skaleCalypso } from './definitions/skale/calypso.js'
 export { skaleCalypsoTestnet } from './definitions/skale/calypsoTestnet.js'
-export { skaleChaosTestnet } from './definitions/skale/chaosTestnet.js'
 export { skaleCryptoBlades } from './definitions/skale/cryptoBlades.js'
 export { skaleCryptoColosseum } from './definitions/skale/cryptoColosseum.js'
 export { skaleEuropa } from './definitions/skale/europa.js'
@@ -169,6 +204,7 @@ export { songbirdTestnet } from './definitions/songbirdTestnet.js'
 export { spicy } from './definitions/spicy.js'
 export { shardeumSphinx } from './definitions/shardeumSphinx.js'
 export { shibarium } from './definitions/shibarium.js'
+export { stratis } from './definitions/stratis.js'
 export { syscoin } from './definitions/syscoin.js'
 export { syscoinTestnet } from './definitions/syscoinTestnet.js'
 export { taraxa } from './definitions/taraxa.js'
@@ -188,22 +224,25 @@ export { wemixTestnet } from './definitions/wemixTestnet.js'
 export { x1Testnet } from './definitions/x1Testnet.js'
 export { xdc } from './definitions/xdc.js'
 export { xdcTestnet } from './definitions/xdcTestnet.js'
+export { zetachain } from './definitions/zetachain.js'
+export { zetachainAthensTestnet } from './definitions/zetachainAthensTestnet.js'
 export { zhejiang } from './definitions/zhejiang.js'
+export { zilliqa } from './definitions/zilliqa.js'
+export { zilliqaTestnet } from './definitions/zilliqaTestnet.js'
 export { zkFair } from './definitions/zkFair.js'
 export { zkFairTestnet } from './definitions/zkFairTestnet.js'
 export { zkSync } from './definitions/zkSync.js'
-export { zkSyncTestnet } from './definitions/zkSyncTestnet.js'
+export { zkSyncInMemoryNode } from './definitions/zkSyncInMemoryNode.js'
+export { zkSyncLocalNode } from './definitions/zkSyncLocalNode.js'
 export { zkSyncSepoliaTestnet } from './definitions/zkSyncSepoliaTestnet.js'
-export { zetachainAthensTestnet } from './definitions/zetachainAthensTestnet.js'
-export { zilliqa } from './definitions/zilliqa.js'
-export { zilliqaTestnet } from './definitions/zilliqaTestnet.js'
+export { zkSyncTestnet } from './definitions/zkSyncTestnet.js'
 export { zora } from './definitions/zora.js'
 export { zoraSepolia } from './definitions/zoraSepolia.js'
 export { zoraTestnet } from './definitions/zoraTestnet.js'
 
 //////////////////////////////////////////////////////////////////////////////////////
-// required for type inference since in explicit return type
-//////////////////////////////////////////////////////////////////////////////////////
+// Required type exports to prevent TypeScript error "TS2742".
+
 export type {
   Assign,
   Omit,
@@ -212,11 +251,44 @@ export type {
   UnionLooseOmit,
 } from '../types/utils.js'
 export type {
+  CeloBlock,
+  CeloBlockOverrides,
+  CeloRpcBlock,
+  CeloRpcBlockOverrides,
+  CeloRpcTransaction,
+  CeloRpcTransactionRequest,
+  CeloTransaction,
+  CeloTransactionRequest,
+  CeloTransactionType,
+  CeloTransactionSerializable,
+  CeloTransactionSerialized,
+  RpcTransactionCIP42,
+  RpcTransactionCIP64,
+  RpcTransactionRequestCIP42,
+  RpcTransactionRequestCIP64,
+  TransactionCIP42,
+  TransactionCIP64,
+  TransactionRequestCIP42,
+  TransactionRequestCIP64,
+  TransactionSerializableCIP42,
+  TransactionSerializableCIP64,
+  TransactionSerializedCIP42,
+  TransactionSerializedCIP64,
+} from '../celo/types.js'
+export type {
   OpStackBlock,
   OpStackBlockOverrides,
   OpStackRpcBlock,
   OpStackRpcBlockOverrides,
-} from './opStack/types/block.js'
+} from '../op-stack/types/block.js'
+export type {
+  SerializeTransactionDepositReturnType,
+  SerializeTransactionErrorType,
+  SerializeTransactionReturnType,
+  serializeTransaction as serializeTransactionOpStack,
+  assertTransactionDeposit as assertTransactionDepositOpStack,
+  serializers as serializersOpStack,
+} from '../op-stack/serializers.js'
 export type {
   OpStackDepositTransaction,
   OpStackRpcDepositTransaction,
@@ -231,4 +303,40 @@ export type {
   OpStackTransactionType,
   TransactionSerializableDeposit,
   TransactionSerializedDeposit,
-} from './opStack/types/transaction.js'
+} from '../op-stack/types/transaction.js'
+export type {
+  ZkSyncBlock,
+  ZkSyncBlockOverrides,
+  ZkSyncRpcBlock,
+  ZkSyncRpcBlockOverrides,
+} from '../zksync/types/block.js'
+export type { ChainEIP712 } from '../zksync/types/chain.js'
+export type { ZkSyncEip712Meta } from '../zksync/types/eip712.js'
+export type { ZkSyncFeeValues } from '../zksync/types/fee.js'
+export type {
+  ZkSyncL2ToL1Log,
+  ZkSyncLog,
+  ZkSyncRpcL2ToL1Log,
+  ZkSyncRpcLog,
+} from '../zksync/types/log.js'
+export type {
+  TransactionRequestEIP712,
+  ZkSyncEIP712TransactionSignable,
+  ZkSyncRpcTransaction,
+  ZkSyncRpcTransactionEIP712,
+  ZkSyncRpcTransactionPriority,
+  ZkSyncRpcTransactionReceiptOverrides,
+  ZkSyncRpcTransactionRequest,
+  ZkSyncRpcTransactionRequestEIP712,
+  ZkSyncTransaction,
+  ZkSyncTransactionEIP712,
+  ZkSyncTransactionReceipt,
+  ZkSyncTransactionReceiptOverrides,
+  ZkSyncTransactionRequest,
+  ZkSyncTransactionRequestEIP712,
+  ZkSyncTransactionSerializable,
+  ZkSyncTransactionSerializableEIP712,
+  ZkSyncTransactionSerialized,
+  ZkSyncTransactionSerializedEIP712,
+  ZkSyncTransactionType,
+} from '../zksync/types/transaction.js'

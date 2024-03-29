@@ -1,5 +1,5 @@
+import { chainConfig } from '../../op-stack/chainConfig.js'
 import { defineChain } from '../../utils/chain/defineChain.js'
-import { chainConfig } from '../opStack/chainConfig.js'
 
 const sourceId = 11_155_111 // sepolia
 
@@ -40,6 +40,11 @@ export const zoraSepolia = /*#__PURE__*/ defineChain({
     portal: {
       [sourceId]: {
         address: '0xeffE2C6cA9Ab797D418f0D91eA60807713f3536f',
+      },
+    },
+    l1StandardBridge: {
+      [sourceId]: {
+        address: '0x5376f1D543dcbB5BD416c56C189e4cB7399fCcCB',
       },
     },
   },

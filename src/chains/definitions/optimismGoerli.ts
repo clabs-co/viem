@@ -1,5 +1,5 @@
+import { chainConfig } from '../../op-stack/chainConfig.js'
 import { defineChain } from '../../utils/chain/defineChain.js'
-import { chainConfig } from '../opStack/chainConfig.js'
 
 const sourceId = 5 // goerli
 
@@ -34,6 +34,11 @@ export const optimismGoerli = /*#__PURE__*/ defineChain({
     portal: {
       [sourceId]: {
         address: '0x5b47E1A08Ea6d985D6649300584e6722Ec4B1383',
+      },
+    },
+    l1StandardBridge: {
+      [sourceId]: {
+        address: '0x636Af16bf2f682dD3109e60102b8E1A089FedAa8',
       },
     },
   },

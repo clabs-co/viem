@@ -1721,6 +1721,9 @@ test('invalid address', () => {
   ).toThrowErrorMatchingInlineSnapshot(`
     [InvalidAddressError: Address "0x111" is invalid.
 
+    - Address must be a hex value of 20 bytes (40 hex characters).
+    - Address must match its checksum counterpart.
+
     Version: viem@1.0.2]
   `)
 })
@@ -1772,4 +1775,24 @@ test('getArrayComponents', () => {
   expect(getArrayComponents('uint256[]')).toEqual([null, 'uint256'])
   expect(getArrayComponents('uint256[][]')).toEqual([null, 'uint256[]'])
   expect(getArrayComponents('uint256')).toBeUndefined()
+})
+
+test('https://github.com/wevm/viem/issues/1960', () => {
+  expect(() =>
+    encodeAbiParameters(
+      [
+        {
+          name: 'boolz',
+          type: 'bool[]',
+          internalType: 'bool[]',
+        },
+      ] as const,
+      // @ts-expect-error
+      [['true']],
+    ),
+  ).toThrowErrorMatchingInlineSnapshot(`
+    [ViemError: Invalid boolean value: "true" (type: string). Expected: \`true\` or \`false\`.
+
+    Version: viem@1.0.2]
+  `)
 })
