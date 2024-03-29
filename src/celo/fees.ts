@@ -1,10 +1,10 @@
-import type { Client } from '../../clients/createClient.js'
+import type { Client } from '../clients/createClient.js'
 import {
   type Address,
   type ChainEstimateFeesPerGasFnParameters,
   type ChainFees,
   type Hex,
-} from '../../index.js'
+} from '../index.js'
 
 import { formatters } from './formatters.js'
 
