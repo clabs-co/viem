@@ -4,6 +4,7 @@ import type {
   CeloTransactionRequest,
   CeloTransactionSerializable,
   TransactionSerializableCIP64,
+  TransactionSerializableCIP66,
 } from './types.js'
 
 export function isEmpty(
@@ -55,4 +56,18 @@ export function isCIP64(
   }
 
   return isEIP1559(transaction) && isPresent(transaction.feeCurrency)
+}
+
+export function isCIP66(
+  transaction: CeloTransactionSerializable | CeloTransactionRequest,
+): transaction is TransactionSerializableCIP66 {
+  if (transaction.type === 'cip66') {
+    return true
+  }
+
+  return (
+    isEIP1559(transaction) &&
+    isPresent(transaction.feeCurrency) &&
+    isPresent(transaction.maxFeeInFeeCurrency)
+  )
 }

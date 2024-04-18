@@ -15,7 +15,7 @@ import type {
   CeloTransaction,
   CeloTransactionRequest,
 } from './types.js'
-import { isCIP64 } from './utils.js'
+import { isCIP64, isCIP66 } from './utils.js'
 
 export const formatters = {
   block: /*#__PURE__*/ defineBlock({
@@ -52,8 +52,11 @@ export const formatters = {
     format(args: CeloRpcTransaction): CeloTransaction {
       const transaction = { feeCurrency: args.feeCurrency } as CeloTransaction
 
-      if (args.type === '0x7b') transaction.type = 'cip64'
-      else {
+      if (args.type === '0x7a') {
+        transaction.type = 'cip66'
+      } else if (args.type === '0x7b') {
+        transaction.type = 'cip64'
+      } else {
         if (args.type === '0x7c') transaction.type = 'cip42'
 
         transaction.gatewayFee = args.gatewayFee
@@ -72,7 +75,9 @@ export const formatters = {
         feeCurrency: args.feeCurrency,
       } as CeloRpcTransactionRequest
 
-      if (isCIP64(args)) {
+      if (isCIP66(args)) {
+        request.type = '0x7a'
+      } else if (isCIP64(args)) {
         request.type = '0x7b'
       }
 
