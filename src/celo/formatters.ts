@@ -77,6 +77,7 @@ export const formatters = {
 
       if (isCIP66(args)) {
         request.type = '0x7a'
+        request.maxFeeInFeeCurrency = args.maxFeeInFeeCurrency
       } else if (isCIP64(args)) {
         request.type = '0x7b'
       }
