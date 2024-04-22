@@ -1,6 +1,5 @@
 import { describe, expect, test } from 'vitest'
 
-import type { TransactionLegacy } from '~viem/index.js'
 import { getBlock } from '../actions/public/getBlock.js'
 import { getTransaction } from '../actions/public/getTransaction.js'
 import { celo } from '../chains/index.js'
@@ -105,6 +104,7 @@ describe('block', () => {
             blockNumber: '0x1',
             chainId: '0x1',
             feeCurrency: null,
+            maxFeeInFeeCurrency: null,
             from: '0x045d685d23e8aa34dc408a66fb408f20dc84d785',
             gas: '0x69420',
             maxFeePerGas: '0x0',
@@ -130,6 +130,7 @@ describe('block', () => {
             blockNumber: '0x1',
             chainId: '0x1',
             feeCurrency: null,
+            maxFeeInFeeCurrency: null,
             from: '0x045d685d23e8aa34dc408a66fb408f20dc84d785',
             gas: '0x69420',
             maxFeePerGas: '0x0',
@@ -187,6 +188,7 @@ describe('block', () => {
             "gatewayFeeRecipient": null,
             "hash": "0x487efb864b308ee85afd7ed5954e968457cfe84e71726114b0a44f31fb876e85",
             "input": "0x389ec778",
+            "maxFeeInFeeCurrency": null,
             "maxFeePerGas": 0n,
             "maxPriorityFeePerGas": 0n,
             "nonce": 1,
@@ -213,6 +215,7 @@ describe('block', () => {
             "gatewayFeeRecipient": null,
             "hash": "0x487efb864b308ee85afd7ed5954e968457cfe84e71726114b0a44f31fb876e85",
             "input": "0x389ec778",
+            "maxFeeInFeeCurrency": null,
             "maxFeePerGas": 0n,
             "maxPriorityFeePerGas": 0n,
             "nonce": 1,
@@ -244,7 +247,7 @@ describe('block', () => {
     })
 
     const { extraData: _extraData, transactions, ...rest } = block
-    expect(transactions[0] as TransactionLegacy).toMatchInlineSnapshot(`
+    expect(transactions[0]).toMatchInlineSnapshot(`
         {
           "blockHash": "0xac8c9bc3b84e103dc321bbe83b670e425ff68bfc9a333a4f1b1b204ad11c583d",
           "blockNumber": 16645775n,
@@ -572,7 +575,7 @@ describe('transaction', () => {
         "gasPrice": undefined,
         "hash": "0xa4b1f606b66105fa45cb5db23d2f6597075701e7f0e2367f4e6a39d17a8cf98b",
         "input": "0x23b872dd000000000000000000000000a00f99bc38b1ecda1fd70eaa1cd31d576a9f46b0000000000000000000000000f16e9b0d03470827a95cdfd0cb8a8a3b46969b910000000000000000000000000000000000000000000000000000002b3b6fb3d0",
-        "maxFeeInFeeCurrency": "0x12345",
+        "maxFeeInFeeCurrency": 74565n,
         "maxFeePerBlobGas": undefined,
         "maxFeePerGas": 4n,
         "maxPriorityFeePerGas": 5n,
@@ -601,7 +604,7 @@ describe('transaction', () => {
       index: 0,
     })
 
-    expect(transaction as TransactionLegacy).toMatchInlineSnapshot(`
+    expect(transaction).toMatchInlineSnapshot(`
       {
         "blockHash": "0x740371d30b3cee9d687f72e3409ba6447eceda7de86bc38b0fa84493114b510b",
         "blockNumber": 16628100n,

@@ -186,11 +186,11 @@ export function assertTransactionCIP42(
   }
 }
 
-type CIP_64_OR_CIP_66 = 'CIP-64' | 'CIP-66'
+type Cip64OrCip66 = 'CIP-64' | 'CIP-66'
 
 export function assertTransactionCIP64(
   transaction: TransactionSerializableCIP64,
-  type: CIP_64_OR_CIP_66 = 'CIP-64',
+  type: Cip64OrCip66 = 'CIP-64',
 ) {
   const {
     chainId,

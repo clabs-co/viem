@@ -54,6 +54,9 @@ export const formatters = {
 
       if (args.type === '0x7a') {
         transaction.type = 'cip66'
+        transaction.maxFeeInFeeCurrency = args.maxFeeInFeeCurrency
+          ? hexToBigInt(args.maxFeeInFeeCurrency)
+          : null
       } else if (args.type === '0x7b') {
         transaction.type = 'cip64'
       } else {
