@@ -455,6 +455,19 @@ describe('invalid params specific to CIP-64', () => {
   })
 })
 
+describe('invalid params specific to CIP-66', () => {
+  test('transaction looks like cip66 but does not have a value for feeCurrency', () => {
+    const transaction: TransactionSerializableCIP66 = {
+      ...baseCip66,
+      type: 'cip66',
+      feeCurrency: undefined,
+    }
+    expect(() => serializeTransaction(transaction)).toThrowError(
+      '`feeCurrency` must be provided for CIP-66 transactions.',
+    )
+  })
+})
+
 describe('Common invalid params (for CIP-64)', () => {
   test('invalid to', () => {
     const transaction: TransactionSerializableCIP64 = {
@@ -516,6 +529,76 @@ describe('Common invalid params (for CIP-64)', () => {
   test('chainID is invalid', () => {
     const transaction: TransactionSerializableCIP64 = {
       ...baseCip64,
+      chainId: -1,
+    }
+
+    expect(() => serializeTransaction(transaction)).toThrowError(
+      `Chain ID "${-1}" is invalid.`,
+    )
+  })
+})
+
+describe('Common invalid params (for CIP-66)', () => {
+  test('invalid to', () => {
+    const transaction: TransactionSerializableCIP66 = {
+      ...baseCip66,
+      to: '0xdeadbeef',
+    }
+    expect(() => serializeTransaction(transaction)).toThrowError(
+      InvalidAddressError,
+    )
+  })
+
+  test('maxPriorityFeePerGas is higher than maxPriorityFee', () => {
+    const transaction: TransactionSerializableCIP66 = {
+      ...baseCip66,
+      maxPriorityFeePerGas: parseGwei('5000000000'),
+      maxFeePerGas: parseGwei('1'),
+    }
+    expect(() => serializeTransaction(transaction)).toThrowError(
+      TipAboveFeeCapError,
+    )
+  })
+
+  test('maxFeePerGas is too high', () => {
+    const transaction: TransactionSerializableCIP66 = {
+      ...baseCip66,
+      maxPriorityFeePerGas: parseGwei('5000000000'),
+      maxFeePerGas:
+        115792089237316195423570985008687907853269984665640564039457584007913129639938n,
+    }
+    expect(() => serializeTransaction(transaction)).toThrowError(
+      FeeCapTooHighError,
+    )
+  })
+
+  test('feeCurrency is not an address', () => {
+    const transaction: TransactionSerializableCIP66 = {
+      ...baseCip66,
+      // @ts-expect-error
+      feeCurrency: 'CUSD',
+    }
+
+    expect(() => serializeTransaction(transaction)).toThrowError(
+      '`feeCurrency` MUST be a token address for CIP-66 transactions.',
+    )
+  })
+
+  test('gasPrice is defined', () => {
+    const transaction: TransactionSerializableCIP66 = {
+      ...baseCip66,
+      // @ts-expect-error
+      gasPrice: BigInt(1),
+    }
+
+    expect(() => serializeTransaction(transaction)).toThrowError(
+      '`gasPrice` is not a valid CIP-66 Transaction attribute.',
+    )
+  })
+
+  test('chainID is invalid', () => {
+    const transaction: TransactionSerializableCIP66 = {
+      ...baseCip66,
       chainId: -1,
     }
 
