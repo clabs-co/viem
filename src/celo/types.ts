@@ -149,12 +149,16 @@ type Transaction<TPending extends boolean = boolean> = Transaction_<
   TPending
 > & {
   feeCurrency: Address | null
+  gatewayFee?: undefined
+  gatewayFeeRecipient?: undefined
 }
 
 export type TransactionCIP42<TPending extends boolean = boolean> =
   TransactionBase<bigint, number, TPending> &
     FeeValuesEIP1559 & {
       feeCurrency: Address | null
+      gatewayFee: bigint | null
+      gatewayFeeRecipient: Address | null
       type: 'cip42'
     }
 
@@ -162,6 +166,8 @@ export type TransactionCIP64<TPending extends boolean = boolean> =
   TransactionBase<bigint, number, TPending> &
     FeeValuesEIP1559 & {
       feeCurrency: Address | null
+      gatewayFee?: undefined
+      gatewayFeeRecipient?: undefined
       type: 'cip64'
     }
 

@@ -12,7 +12,10 @@ import {
   parseTransaction as parseTransaction_,
   toTransactionArray,
 } from '../utils/transaction/parseTransaction.js'
-import { assertTransactionCIP64 } from './serializers.js'
+import {
+  assertTransactionCIP42,
+  assertTransactionCIP64,
+} from './serializers.js'
 import type {
   CeloTransactionSerialized,
   CeloTransactionType,
@@ -123,7 +126,7 @@ function parseTransactionCIP42(
   if (accessList.length !== 0 && accessList !== '0x')
     transaction.accessList = parseAccessList(accessList as RecursiveArray<Hex>)
 
-  // assertTransactionCIP42(transaction as TransactionSerializableCIP42)
+  assertTransactionCIP42(transaction as TransactionSerializableCIP42)
 
   return transaction as TransactionSerializableCIP42
 }
