@@ -80,7 +80,10 @@ export const formatters = {
 
       if (isCIP66(args)) {
         request.type = '0x7a'
-        request.maxFeeInFeeCurrency = args.maxFeeInFeeCurrency
+        request.maxFeeInFeeCurrency =
+          typeof args.maxFeeInFeeCurrency !== 'undefined'
+            ? numberToHex(args.maxFeeInFeeCurrency)
+            : undefined
       } else if (isCIP64(args)) {
         request.type = '0x7b'
       }

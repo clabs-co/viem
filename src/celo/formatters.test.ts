@@ -765,6 +765,7 @@ describe('transactionRequest', () => {
       }
     `)
   })
+
   test('formatter cip64', () => {
     expect(
       transactionRequest.format({
@@ -806,6 +807,56 @@ describe('transactionRequest', () => {
         "maxPriorityFeePerGas": "0x2",
         "to": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
         "type": "0x7b",
+        "value": "0x1",
+      }
+    `)
+  })
+
+  test('formatter cip66', () => {
+    expect(
+      transactionRequest.format({
+        feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
+        maxFeeInFeeCurrency: 123n,
+        from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
+        gas: 1n,
+        maxFeePerGas: 2n,
+        maxPriorityFeePerGas: 1n,
+        nonce: 1,
+        value: 1n,
+      }),
+    ).toMatchInlineSnapshot(`
+      {
+        "feeCurrency": "0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9",
+        "from": "0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9",
+        "gas": "0x1",
+        "maxFeeInFeeCurrency": "0x7b",
+        "maxFeePerGas": "0x2",
+        "maxPriorityFeePerGas": "0x1",
+        "nonce": "0x1",
+        "type": "0x7a",
+        "value": "0x1",
+      }
+    `)
+
+    expect(
+      transactionRequest.format({
+        from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
+        to: '0x70997970c51812dc3a010c7d01b50e0d17dc79c8', // Recipient (illustrative address)
+        value: 1n,
+        feeCurrency: '0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1', // cUSD fee currency
+        maxFeeInFeeCurrency: 123n,
+        maxFeePerGas: 2n, // Special field for dynamic fee transaction type (EIP-1559)
+        maxPriorityFeePerGas: 2n, // Special field for dynamic fee transaction type (EIP-1559)
+      }),
+    ).toMatchInlineSnapshot(`
+      {
+        "feeCurrency": "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+        "from": "0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9",
+        "maxFeeInFeeCurrency": "0x7b",
+        "maxFeePerGas": "0x2",
+        "maxPriorityFeePerGas": "0x2",
+        "to": "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+        "type": "0x7a",
         "value": "0x1",
       }
     `)
