@@ -2,6 +2,7 @@ import type { ChainFormatters } from '../types/chain.js'
 import type { Hash } from '../types/misc.js'
 import type { RpcTransaction } from '../types/rpc.js'
 import { hexToBigInt } from '../utils/encoding/fromHex.js'
+import { numberToHex } from '../utils/encoding/toHex.js'
 import { defineBlock } from '../utils/formatters/block.js'
 import {
   defineTransaction,

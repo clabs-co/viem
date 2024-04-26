@@ -21,7 +21,13 @@ import type {
   TransactionSerializedCIP64,
   TransactionSerializedCIP66,
 } from './types.js'
-import { isCIP64, isCIP66, isEmpty, isPresent } from './utils.js'
+import {
+  EMPTY_HEX_VALUE,
+  isCIP64,
+  isCIP66,
+  isEmpty,
+  isPresent,
+} from './utils.js'
 
 export function serializeTransaction(
   transaction: CeloTransactionSerializable,
@@ -68,13 +74,13 @@ function serializeTransactionCIP64(
 
   const serializedTransaction = [
     toHex(chainId),
-    nonce ? toHex(nonce) : '0x',
-    maxPriorityFeePerGas ? toHex(maxPriorityFeePerGas) : '0x',
-    maxFeePerGas ? toHex(maxFeePerGas) : '0x',
-    gas ? toHex(gas) : '0x',
-    to ?? '0x',
-    value ? toHex(value) : '0x',
-    data ?? '0x',
+    nonce ? toHex(nonce) : EMPTY_HEX_VALUE,
+    maxPriorityFeePerGas ? toHex(maxPriorityFeePerGas) : EMPTY_HEX_VALUE,
+    maxFeePerGas ? toHex(maxFeePerGas) : EMPTY_HEX_VALUE,
+    gas ? toHex(gas) : EMPTY_HEX_VALUE,
+    to ?? EMPTY_HEX_VALUE,
+    value ? toHex(value) : EMPTY_HEX_VALUE,
+    data ?? EMPTY_HEX_VALUE,
     serializeAccessList(accessList),
     feeCurrency!,
     ...toYParitySignatureArray(transaction, signature),
@@ -108,13 +114,13 @@ function serializeTransactionCIP66(
 
   const serializedTransaction = [
     toHex(chainId),
-    nonce ? toHex(nonce) : '0x',
-    maxPriorityFeePerGas ? toHex(maxPriorityFeePerGas) : '0x',
-    maxFeePerGas ? toHex(maxFeePerGas) : '0x',
-    gas ? toHex(gas) : '0x',
-    to ?? '0x',
-    value ? toHex(value) : '0x',
-    data ?? '0x',
+    nonce ? toHex(nonce) : EMPTY_HEX_VALUE,
+    maxPriorityFeePerGas ? toHex(maxPriorityFeePerGas) : EMPTY_HEX_VALUE,
+    maxFeePerGas ? toHex(maxFeePerGas) : EMPTY_HEX_VALUE,
+    gas ? toHex(gas) : EMPTY_HEX_VALUE,
+    to ?? EMPTY_HEX_VALUE,
+    value ? toHex(value) : EMPTY_HEX_VALUE,
+    data ?? EMPTY_HEX_VALUE,
     serializeAccessList(accessList),
     feeCurrency!,
     toHex(maxFeeInFeeCurrency!),

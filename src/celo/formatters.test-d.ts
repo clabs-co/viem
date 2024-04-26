@@ -14,6 +14,7 @@ import type { RpcBlock } from '../types/rpc.js'
 import type { TransactionRequest } from '../types/transaction.js'
 import type { Assign, ExactPartial } from '../types/utils.js'
 import { formatters } from './formatters.js'
+import { EMPTY_HEX_VALUE } from './utils.js'
 import type {
   CeloBlockOverrides,
   CeloRpcTransaction,
@@ -151,15 +152,15 @@ describe('smoke', () => {
 
   test('transactionRequest (prepareTransactionRequest)', async () => {
     const client = createWalletClient({
-      account: '0x',
+      account: EMPTY_HEX_VALUE,
       chain: celo,
       transport: http(),
     })
 
     prepareTransactionRequest(client, {
-      feeCurrency: '0x',
+      feeCurrency: EMPTY_HEX_VALUE,
       gatewayFee: 0n,
-      gatewayFeeRecipient: '0x',
+      gatewayFeeRecipient: EMPTY_HEX_VALUE,
     })
 
     // @ts-expect-error `gasPrice` is not defined
@@ -172,43 +173,43 @@ describe('smoke', () => {
 
   test('transactionRequest (sendTransaction)', async () => {
     const client = createWalletClient({
-      account: '0x',
+      account: EMPTY_HEX_VALUE,
       chain: celo,
       transport: http(),
     })
 
     sendTransaction(client, {
-      feeCurrency: '0x',
+      feeCurrency: EMPTY_HEX_VALUE,
       gatewayFee: 0n,
-      gatewayFeeRecipient: '0x',
+      gatewayFeeRecipient: EMPTY_HEX_VALUE,
     })
   })
 
   test('transactionRequest (signTransaction)', async () => {
     const client = createWalletClient({
-      account: '0x',
+      account: EMPTY_HEX_VALUE,
       chain: celo,
       transport: http(),
     })
 
     signTransaction(client, {
-      feeCurrency: '0x',
+      feeCurrency: EMPTY_HEX_VALUE,
       gatewayFee: 0n,
-      gatewayFeeRecipient: '0x',
+      gatewayFeeRecipient: EMPTY_HEX_VALUE,
     })
   })
 
   test('transactionRequest (chain on action)', async () => {
     const client = createWalletClient({
-      account: '0x',
+      account: EMPTY_HEX_VALUE,
       transport: http(),
     })
 
     sendTransaction(client, {
       chain: celo,
-      feeCurrency: '0x',
+      feeCurrency: EMPTY_HEX_VALUE,
       gatewayFee: 0n,
-      gatewayFeeRecipient: '0x',
+      gatewayFeeRecipient: EMPTY_HEX_VALUE,
     })
   })
 })

@@ -14,6 +14,7 @@ import type {
   TransactionSerializableCIP64,
   TransactionSerializableCIP66,
 } from './types.js'
+import { EMPTY_HEX_VALUE } from './utils.js'
 
 test('should be able to parse a cip42 transaction', () => {
   const signedTransaction =
@@ -175,19 +176,19 @@ describe('should throw an error for invalid cip42 transactions', () => {
     expect(() =>
       parseTransaction(
         `0x7c${toRlp([
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
         ]).slice(2)}`,
       ),
     ).toThrowErrorMatchingInlineSnapshot(`
@@ -276,7 +277,7 @@ describe('should parse a CIP64 transaction', () => {
   test('with data as 0x', () => {
     const transactionWithData: TransactionSerializableCIP64 = {
       ...transactionCip64,
-      data: '0x',
+      data: EMPTY_HEX_VALUE,
     }
 
     const serialized = serializeTransaction(transactionWithData)
@@ -351,17 +352,17 @@ describe('should throw an error for invalid cip64 transactions', () => {
     expect(() =>
       parseTransaction(
         `0x7b${toRlp([
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
-          '0x',
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
+          EMPTY_HEX_VALUE,
         ]).slice(2)}`,
       ),
     ).toThrowErrorMatchingInlineSnapshot(`
@@ -454,7 +455,7 @@ describe('should parse a CIP66 transaction', () => {
   test('with data as 0x', () => {
     const transactionWithData: TransactionSerializableCIP66 = {
       ...transactionCip66,
-      data: '0x',
+      data: EMPTY_HEX_VALUE,
     }
 
     const serialized = serializeTransaction(transactionWithData)
