@@ -14,12 +14,12 @@ import type { RpcBlock } from '../types/rpc.js'
 import type { TransactionRequest } from '../types/transaction.js'
 import type { Assign, ExactPartial } from '../types/utils.js'
 import { formatters } from './formatters.js'
-import { EMPTY_HEX_VALUE } from './utils.js'
 import type {
   CeloBlockOverrides,
   CeloRpcTransaction,
   CeloTransactionRequest,
 } from './types.js'
+import { EMPTY_HEX_VALUE } from './utils.js'
 
 describe('block', () => {
   expectTypeOf(formatters.block.format).parameter(0).toEqualTypeOf<

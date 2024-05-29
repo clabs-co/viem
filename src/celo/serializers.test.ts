@@ -385,8 +385,6 @@ describe('cip66', () => {
       serializer: serializeTransaction,
     })
 
-    console.log('SIGNED:', signed)
-
     const serialized =
       '0x7af88e82a4ec01847735940084773594008094f39fd6e51aad88f6f4ce6ab8827279cfffb92266880de0b6b3a764000080c094765de816845861e75a25fca122bb6898b8b1282a860b3a4b56fa0001a0f376d59efea3eb24397b74303b6225aeb6d32ca57f2854c4454c49c779cd68dda0214b12ee3d68b7aec1dc43ee5e668bd76ba3a805350e8ae9ca54a381ac9871e8'
     expect(signed).toEqual(serialized)
