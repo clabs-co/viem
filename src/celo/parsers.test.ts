@@ -499,4 +499,24 @@ describe('should parse a CIP66 transaction', () => {
         }
       `)
   })
+
+  test('using example from blockchain repo', () => {
+    // created by celo blockchain client
+    const transaction =
+      '0x7af8ce82a4ec01843b9aca00850342770c0083030d409443d72ff17701b2da814620735c39c620ce0ea4a180b844a9059cbb000000000000000000000000bd8be21f6883569ad7d15cc55c87137fcef308c300000000000000000000000000000000000000000000000001605eba271024d6c094765de816845861e75a25fca122bb6898b8b1282a8501a13b860080a02a015905a494549d8a1da26ce769309963e43f407936bbce1ea8276072b08416a072fd12d24c44bc79648bd88f4d8c158f2f0778694557868b3dc7d80e3aa6b539'
+    expect(parseTransaction(transaction)).toMatchInlineSnapshot(`
+      {
+        "chainId": 42220,
+        "data": "0xa9059cbb000000000000000000000000bd8be21f6883569ad7d15cc55c87137fcef308c300000000000000000000000000000000000000000000000001605eba271024d6",
+        "feeCurrency": "0x765de816845861e75a25fca122bb6898b8b1282a",
+        "gas": 200000n,
+        "maxFeeInFeeCurrency": 7000000000n,
+        "maxFeePerGas": 14000000000n,
+        "maxPriorityFeePerGas": 1000000000n,
+        "nonce": 1,
+        "to": "0x43d72ff17701b2da814620735c39c620ce0ea4a1",
+        "type": "cip66",
+      }
+    `)
+  })
 })

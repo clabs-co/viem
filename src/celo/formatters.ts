@@ -32,6 +32,14 @@ export const formatters = {
         if (typeof transaction === 'string') return transaction
         return {
           ...formatTransaction(transaction as RpcTransaction),
+          ...(transaction.maxFeeInFeeCurrency
+            ? {
+                maxFeeInFeeCurrency:
+                  typeof transaction.maxFeeInFeeCurrency === 'string'
+                    ? hexToBigInt(transaction.maxFeeInFeeCurrency)
+                    : transaction.maxFeeInFeeCurrency,
+              }
+            : {}),
           feeCurrency: transaction.feeCurrency,
           ...(transaction.type !== '0x7b'
             ? {
@@ -57,7 +65,7 @@ export const formatters = {
         transaction.type = 'cip66'
         transaction.maxFeeInFeeCurrency = args.maxFeeInFeeCurrency
           ? hexToBigInt(args.maxFeeInFeeCurrency)
-          : null
+          : undefined
       } else if (args.type === '0x7b') {
         transaction.type = 'cip64'
       } else {

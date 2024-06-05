@@ -110,7 +110,7 @@ export type CeloTransactionType = TransactionType | 'cip42' | 'cip64' | 'cip66'
 type RpcTransaction<TPending extends boolean = boolean> =
   RpcTransaction_<TPending> & {
     feeCurrency: Address | null
-    maxFeeInFeeCurrency: bigint | null
+    maxFeeInFeeCurrency?: bigint | undefined
     gatewayFee: Hex | null
     gatewayFeeRecipient: Address | null
   }
@@ -149,8 +149,8 @@ export type RpcTransactionCIP66<TPending extends boolean = boolean> = Omit<
   'typeHex'
 > &
   FeeValuesEIP1559<Quantity> & {
-    feeCurrency: Address | null
-    maxFeeInFeeCurrency: Quantity | null
+    feeCurrency: Address
+    maxFeeInFeeCurrency: Quantity
     gatewayFee?: undefined
     gatewayFeeRecipient?: undefined
     type: '0x7a'
@@ -184,7 +184,7 @@ type Transaction<TPending extends boolean = boolean> = Transaction_<
   TPending
 > & {
   feeCurrency: Address | null
-  maxFeeInFeeCurrency: bigint | null
+  maxFeeInFeeCurrency: bigint | undefined
   gatewayFee: bigint | null
   gatewayFeeRecipient: Address | null
 }
@@ -212,8 +212,8 @@ export type TransactionCIP64<TPending extends boolean = boolean> =
 export type TransactionCIP66<TPending extends boolean = boolean> =
   TransactionBase<bigint, number, TPending> &
     FeeValuesEIP1559 & {
-      feeCurrency: Address | null
-      maxFeeInFeeCurrency: bigint | null
+      feeCurrency: Address
+      maxFeeInFeeCurrency: bigint
       gatewayFee?: undefined
       gatewayFeeRecipient?: undefined
       type: 'cip66'

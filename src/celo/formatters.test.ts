@@ -104,7 +104,6 @@ describe('block', () => {
             blockNumber: '0x1',
             chainId: '0x1',
             feeCurrency: null,
-            maxFeeInFeeCurrency: null,
             from: '0x045d685d23e8aa34dc408a66fb408f20dc84d785',
             gas: '0x69420',
             maxFeePerGas: '0x0',
@@ -130,7 +129,7 @@ describe('block', () => {
             blockNumber: '0x1',
             chainId: '0x1',
             feeCurrency: null,
-            maxFeeInFeeCurrency: null,
+            maxFeeInFeeCurrency: undefined,
             from: '0x045d685d23e8aa34dc408a66fb408f20dc84d785',
             gas: '0x69420',
             maxFeePerGas: '0x0',
@@ -188,7 +187,6 @@ describe('block', () => {
             "gatewayFeeRecipient": null,
             "hash": "0x487efb864b308ee85afd7ed5954e968457cfe84e71726114b0a44f31fb876e85",
             "input": "0x389ec778",
-            "maxFeeInFeeCurrency": null,
             "maxFeePerGas": 0n,
             "maxPriorityFeePerGas": 0n,
             "nonce": 1,
@@ -215,7 +213,7 @@ describe('block', () => {
             "gatewayFeeRecipient": null,
             "hash": "0x487efb864b308ee85afd7ed5954e968457cfe84e71726114b0a44f31fb876e85",
             "input": "0x389ec778",
-            "maxFeeInFeeCurrency": null,
+            "maxFeeInFeeCurrency": undefined,
             "maxFeePerGas": 0n,
             "maxPriorityFeePerGas": 0n,
             "nonce": 1,
@@ -311,7 +309,7 @@ describe('transaction', () => {
         blockNumber: '0x1',
         chainId: '0x1',
         feeCurrency: null,
-        maxFeeInFeeCurrency: null,
+        maxFeeInFeeCurrency: undefined,
         from: '0xa152f8bb749c55e9943a3a0a3111d18ee2b3f94e',
         gas: '0x2',
         gasPrice: undefined,
@@ -346,7 +344,7 @@ describe('transaction', () => {
         "gatewayFeeRecipient": null,
         "hash": "0xa4b1f606b66105fa45cb5db23d2f6597075701e7f0e2367f4e6a39d17a8cf98b",
         "input": "0x23b872dd000000000000000000000000a00f99bc38b1ecda1fd70eaa1cd31d576a9f46b0000000000000000000000000f16e9b0d03470827a95cdfd0cb8a8a3b46969b910000000000000000000000000000000000000000000000000000002b3b6fb3d0",
-        "maxFeeInFeeCurrency": null,
+        "maxFeeInFeeCurrency": undefined,
         "maxFeePerGas": 4n,
         "maxPriorityFeePerGas": 5n,
         "nonce": 6,
@@ -370,7 +368,6 @@ describe('transaction', () => {
         blockNumber: '0x1',
         chainId: '0x1',
         feeCurrency: null,
-        maxFeeInFeeCurrency: null,
         from: '0xa152f8bb749c55e9943a3a0a3111d18ee2b3f94e',
         gas: '0x2',
         gasPrice: undefined,
@@ -405,7 +402,6 @@ describe('transaction', () => {
         "gatewayFeeRecipient": null,
         "hash": "0xa4b1f606b66105fa45cb5db23d2f6597075701e7f0e2367f4e6a39d17a8cf98b",
         "input": "0x23b872dd000000000000000000000000a00f99bc38b1ecda1fd70eaa1cd31d576a9f46b0000000000000000000000000f16e9b0d03470827a95cdfd0cb8a8a3b46969b910000000000000000000000000000000000000000000000000000002b3b6fb3d0",
-        "maxFeeInFeeCurrency": null,
         "maxFeePerGas": 4n,
         "maxPriorityFeePerGas": 5n,
         "nonce": 6,
@@ -637,11 +633,11 @@ describe('transactionRequest', () => {
 
   test('formatter CIP-42 (removed, should produce CIP-64 when feeCurrency specified, EIP-1559 otherwise)', () => {
     expect(
+      // @ts-expect-error
       transactionRequest.format({
         feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         gas: 1n,
-        // @ts-ignore
         gatewayFee: 4n,
         gatewayFeeRecipient: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         maxFeePerGas: 2n,
@@ -663,11 +659,11 @@ describe('transactionRequest', () => {
     `)
 
     expect(
+      // @ts-expect-error
       transactionRequest.format({
         feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         gas: 1n,
-        // @ts-ignore
         gatewayFeeRecipient: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         maxFeePerGas: 2n,
         maxPriorityFeePerGas: 1n,
@@ -688,11 +684,12 @@ describe('transactionRequest', () => {
     `)
 
     expect(
+      // @ts-expect-error
+
       transactionRequest.format({
         feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         gas: 1n,
-        // @ts-ignore
         gatewayFee: 4n,
         gatewayFeeRecipient: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         maxFeePerGas: 2n,
@@ -714,11 +711,11 @@ describe('transactionRequest', () => {
     `)
 
     expect(
+      // @ts-expect-error
       transactionRequest.format({
         feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         gas: 1n,
-        // @ts-ignore
         gatewayFee: 4n,
         gatewayFeeRecipient: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         maxFeePerGas: 2n,
@@ -740,11 +737,11 @@ describe('transactionRequest', () => {
     `)
 
     expect(
+      // @ts-expect-error
       transactionRequest.format({
         feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         gas: 1n,
-        // @ts-ignore
         gatewayFee: 4n,
         gatewayFeeRecipient: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         maxFeePerGas: 2n,

@@ -276,16 +276,17 @@ function parseTransactionCIP66(
     transaction.nonce = hexToNumber(nonce)
   if (isHex(value) && value !== EMPTY_HEX_VALUE)
     transaction.value = hexToBigInt(value)
-  if (isHex(feeCurrency) && feeCurrency !== EMPTY_HEX_VALUE)
-    transaction.feeCurrency = feeCurrency
-  if (isHex(maxFeeInFeeCurrency) && maxFeeInFeeCurrency !== EMPTY_HEX_VALUE)
-    transaction.maxFeeInFeeCurrency = hexToBigInt(maxFeeInFeeCurrency)
   if (isHex(maxFeePerGas) && maxFeePerGas !== EMPTY_HEX_VALUE)
     transaction.maxFeePerGas = hexToBigInt(maxFeePerGas)
   if (isHex(maxPriorityFeePerGas) && maxPriorityFeePerGas !== EMPTY_HEX_VALUE)
     transaction.maxPriorityFeePerGas = hexToBigInt(maxPriorityFeePerGas)
   if (accessList.length !== 0 && accessList !== EMPTY_HEX_VALUE)
     transaction.accessList = parseAccessList(accessList as RecursiveArray<Hex>)
+
+  if (isHex(feeCurrency) && feeCurrency !== EMPTY_HEX_VALUE)
+    transaction.feeCurrency = feeCurrency
+  if (isHex(maxFeeInFeeCurrency) && maxFeeInFeeCurrency !== EMPTY_HEX_VALUE)
+    transaction.maxFeeInFeeCurrency = hexToBigInt(maxFeeInFeeCurrency)
 
   assertTransactionCIP66(transaction as TransactionSerializableCIP66)
 
