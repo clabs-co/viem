@@ -159,8 +159,7 @@ describe('smoke', () => {
 
     prepareTransactionRequest(client, {
       feeCurrency: EMPTY_HEX_VALUE,
-      gatewayFee: 0n,
-      gatewayFeeRecipient: EMPTY_HEX_VALUE,
+      maxFeeInFeeCurrency: 2000000000n,
     })
 
     // @ts-expect-error `gasPrice` is not defined
