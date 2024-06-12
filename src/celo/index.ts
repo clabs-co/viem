@@ -5,6 +5,7 @@ export { type ParseTransactionReturnType, parseTransaction } from './parsers.js'
 
 export {
   type SerializeTransactionCIP64ReturnType,
+  type SerializeTransactionCIP66ReturnType,
   serializeTransaction,
 } from './serializers.js'
 
