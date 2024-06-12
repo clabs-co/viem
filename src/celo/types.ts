@@ -87,7 +87,6 @@ export type CeloTransaction<isPending extends boolean = boolean> =
   | TransactionCIP64<isPending>
   | TransactionCIP66<isPending>
 
-
 export type CeloTransactionRequest =
   | TransactionRequest
   | TransactionRequestCIP64
@@ -159,24 +158,22 @@ export type RpcTransactionCIP66<TPending extends boolean = boolean> = Omit<
 export type RpcTransactionRequestCIP64 = TransactionRequestBase<
   Quantity,
   Index
-> &
-  {
-    accessList?: AccessList | undefined
-    feeCurrency?: Address | undefined
-    maxFeeInFeeCurrency?: undefined
-    type?: '0x7b' | undefined
-  } & ExactPartial<FeeValuesEIP1559<Quantity>> 
+> & {
+  accessList?: AccessList | undefined
+  feeCurrency?: Address | undefined
+  maxFeeInFeeCurrency?: undefined
+  type?: '0x7b' | undefined
+} & ExactPartial<FeeValuesEIP1559<Quantity>>
 
 export type RpcTransactionRequestCIP66 = TransactionRequestBase<
   Quantity,
   Index
-> &
-  {
-    accessList?: AccessList | undefined
-    feeCurrency?: Address | undefined
-    maxFeeInFeeCurrency?: Quantity | undefined
-    type?: '0x7a' | undefined
-  } & ExactPartial<FeeValuesEIP1559<Quantity>>
+> & {
+  accessList?: AccessList | undefined
+  feeCurrency?: Address | undefined
+  maxFeeInFeeCurrency?: Quantity | undefined
+  type?: '0x7a' | undefined
+} & ExactPartial<FeeValuesEIP1559<Quantity>>
 
 type Transaction<isPending extends boolean = boolean> = core_Transaction<
   bigint,
@@ -190,34 +187,31 @@ type Transaction<isPending extends boolean = boolean> = core_Transaction<
 }
 
 export type TransactionCIP42<isPending extends boolean = boolean> =
-  TransactionBase<bigint, number, isPending> &
-    {
-      feeCurrency: Address | null
-      maxFeeInFeeCurrency?: undefined
-      gatewayFee: bigint | null
-      gatewayFeeRecipient: Address | null
-      type: 'cip42'
-    } & FeeValuesEIP1559
+  TransactionBase<bigint, number, isPending> & {
+    feeCurrency: Address | null
+    maxFeeInFeeCurrency?: undefined
+    gatewayFee: bigint | null
+    gatewayFeeRecipient: Address | null
+    type: 'cip42'
+  } & FeeValuesEIP1559
 
 export type TransactionCIP64<isPending extends boolean = boolean> =
-  TransactionBase<bigint, number, isPending> &
-    {
-      feeCurrency: Address | null
-      maxFeeInFeeCurrency?: undefined
-      gatewayFee?: undefined
-      gatewayFeeRecipient?: undefined
-      type: 'cip64'
-    } & FeeValuesEIP1559
+  TransactionBase<bigint, number, isPending> & {
+    feeCurrency: Address | null
+    maxFeeInFeeCurrency?: undefined
+    gatewayFee?: undefined
+    gatewayFeeRecipient?: undefined
+    type: 'cip64'
+  } & FeeValuesEIP1559
 
 export type TransactionCIP66<isPending extends boolean = boolean> =
-  TransactionBase<bigint, number, isPending> &
-    {
-      feeCurrency: Address
-      maxFeeInFeeCurrency: bigint
-      gatewayFee?: undefined
-      gatewayFeeRecipient?: undefined
-      type: 'cip66'
-    }  & FeeValuesEIP1559 
+  TransactionBase<bigint, number, isPending> & {
+    feeCurrency: Address
+    maxFeeInFeeCurrency: bigint
+    gatewayFee?: undefined
+    gatewayFeeRecipient?: undefined
+    type: 'cip66'
+  } & FeeValuesEIP1559
 
 type TransactionRequest = core_TransactionRequest & {
   feeCurrency?: Address | undefined
