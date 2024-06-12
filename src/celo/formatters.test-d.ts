@@ -26,7 +26,7 @@ describe('block', () => {
     Assign<
       ExactPartial<RpcBlock>,
       CeloBlockOverrides & {
-        transactions: `0x${string}`[] | CeloRpcTransaction[]
+        transactions: readonly `0x${string}`[] | readonly CeloRpcTransaction[]
       }
     >
   >()
@@ -180,8 +180,6 @@ describe('smoke', () => {
 
     sendTransaction(client, {
       feeCurrency: EMPTY_HEX_VALUE,
-      gatewayFee: 0n,
-      gatewayFeeRecipient: EMPTY_HEX_VALUE,
     })
   })
 
@@ -194,8 +192,6 @@ describe('smoke', () => {
 
     signTransaction(client, {
       feeCurrency: EMPTY_HEX_VALUE,
-      gatewayFee: 0n,
-      gatewayFeeRecipient: EMPTY_HEX_VALUE,
     })
   })
 
@@ -208,8 +204,6 @@ describe('smoke', () => {
     sendTransaction(client, {
       chain: celo,
       feeCurrency: EMPTY_HEX_VALUE,
-      gatewayFee: 0n,
-      gatewayFeeRecipient: EMPTY_HEX_VALUE,
     })
   })
 })

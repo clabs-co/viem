@@ -1,5 +1,67 @@
 # viem
 
+## 2.13.8
+
+### Patch Changes
+
+- [#2375](https://github.com/wevm/viem/pull/2375) [`1d329882`](https://github.com/wevm/viem/commit/1d329882c6b37e722260a40c2745b8f0baa56bf9) Thanks [@ezynda3](https://github.com/ezynda3)! - Added API URL to `sei` chain.
+
+- [`5e082655`](https://github.com/wevm/viem/commit/5e082655859584ce7ee8f97fc5e8dca73a8a6b4e) Thanks [@jxom](https://github.com/jxom)! - Added `disputeGameFactory` contract to `optimism` chain.
+
+## 2.13.7
+
+### Patch Changes
+
+- [#2366](https://github.com/wevm/viem/pull/2366) [`561b03a5`](https://github.com/wevm/viem/commit/561b03a53955894f49e96f4af080588ac39657a0) Thanks [@fullstackninja864](https://github.com/fullstackninja864)! - Updated `nativeCurrency` for `defichainEvmTestnet` and `defichainEvm`.
+
+- [`a3a8b1b1`](https://github.com/wevm/viem/commit/a3a8b1b191466e77baeb7975f34f8ee4b3117a69) Thanks [@jxom](https://github.com/jxom)! - Exported `serializeTypedData`.
+
+## 2.13.6
+
+### Patch Changes
+
+- [#2337](https://github.com/wevm/viem/pull/2337) [`8984eee7`](https://github.com/wevm/viem/commit/8984eee7f23d430070e42ac1f2645ced0e82faf8) Thanks [@jaeil-wiki](https://github.com/jaeil-wiki)! - Updated `createSiweMessage` `statement` construction to match ABNF Message Format.
+
+- [#2351](https://github.com/wevm/viem/pull/2351) [`48e6d50c`](https://github.com/wevm/viem/commit/48e6d50cae738e55869758cb25c52b2244069f09) Thanks [@agsola](https://github.com/agsola)! - Fixed `createSiweMessage` domain check to be RFC 3986 compliant.
+
+## 2.13.5
+
+### Patch Changes
+
+- [#2356](https://github.com/wevm/viem/pull/2356) [`e6678622b8be1d7b72abe2e1331d455fb4a9c11f`](https://github.com/wevm/viem/commit/e6678622b8be1d7b72abe2e1331d455fb4a9c11f) Thanks [@blascokoa](https://github.com/blascokoa)! - Added SatoshiVM chain
+
+- [#2361](https://github.com/wevm/viem/pull/2361) [`05c166e5cb2f5745ac48ba482fac14f4890f5c83`](https://github.com/wevm/viem/commit/05c166e5cb2f5745ac48ba482fac14f4890f5c83) Thanks [@tirogen](https://github.com/tirogen)! - Added Bitkub chain.
+
+- [`7aad10e2ed7d3ecf5a6c38cd326aa9ff8dead239`](https://github.com/wevm/viem/commit/7aad10e2ed7d3ecf5a6c38cd326aa9ff8dead239) Thanks [@jxom](https://github.com/jxom)! - Added optional chaining to error handling in `withTimeout`.
+
+## 2.13.4
+
+### Patch Changes
+
+- [#2348](https://github.com/wevm/viem/pull/2348) [`6cb084dd56260b1d0116e9ff9dc354117d33049e`](https://github.com/wevm/viem/commit/6cb084dd56260b1d0116e9ff9dc354117d33049e) Thanks [@ClockRide](https://github.com/ClockRide)! - Added `testnet: true` to fantomTestnet.
+
+- [#2350](https://github.com/wevm/viem/pull/2350) [`19f3db87bfaa113bb6a4156f45c35f0ffcc5df7e`](https://github.com/wevm/viem/commit/19f3db87bfaa113bb6a4156f45c35f0ffcc5df7e) Thanks [@ClockRide](https://github.com/ClockRide)! - Added `testnet: true` to `btrTestnet`.
+
+- [#2349](https://github.com/wevm/viem/pull/2349) [`4bfe975955d72fcaea46bc9bb56f4a475c39afb1`](https://github.com/wevm/viem/commit/4bfe975955d72fcaea46bc9bb56f4a475c39afb1) Thanks [@abs3ntdev](https://github.com/abs3ntdev)! - Added sei chain
+
+## 2.13.3
+
+### Patch Changes
+
+- [`b6fd573d72b7cc74efc8c4a4a79ff76073242240`](https://github.com/wevm/viem/commit/b6fd573d72b7cc74efc8c4a4a79ff76073242240) Thanks [@jxom](https://github.com/jxom)! - Added `getAction` to `writeContracts`.
+
+- [#2336](https://github.com/wevm/viem/pull/2336) [`7cb40947c1186665c65535bb348fea901dde7f6a`](https://github.com/wevm/viem/commit/7cb40947c1186665c65535bb348fea901dde7f6a) Thanks [@Lycan-Chain](https://github.com/Lycan-Chain)! - Added Lycan chain.
+
+## 2.13.2
+
+### Patch Changes
+
+- [#2328](https://github.com/wevm/viem/pull/2328) [`d946d55b8431b255c4cdc2d20e413f9064e7513a`](https://github.com/wevm/viem/commit/d946d55b8431b255c4cdc2d20e413f9064e7513a) Thanks [@tmm](https://github.com/tmm)! - Improved `.extend` performance with `publicActions` and other large types.
+
+- [#2334](https://github.com/wevm/viem/pull/2334) [`d4f34cb7bd44ca596573fc0a84fafbc60f4ea42b`](https://github.com/wevm/viem/commit/d4f34cb7bd44ca596573fc0a84fafbc60f4ea42b) Thanks [@Migl992](https://github.com/Migl992)! - Updated Avalanche explorer URLs.
+
+- [#2329](https://github.com/wevm/viem/pull/2329) [`db85cc6bc9b29349b1eb077ebb6ea2a248bb5794`](https://github.com/wevm/viem/commit/db85cc6bc9b29349b1eb077ebb6ea2a248bb5794) Thanks [@abs3ntdev](https://github.com/abs3ntdev)! - Exported `DecodeFunctionDataReturnType` type.
+
 ## 2.13.1
 
 ### Patch Changes

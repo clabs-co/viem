@@ -23,10 +23,10 @@ export const formatters = {
     exclude: ['difficulty', 'gasLimit', 'mixHash', 'nonce', 'uncles'],
     format(
       args: CeloBlockOverrides & {
-        transactions: Hash[] | CeloRpcTransaction[]
+        transactions: readonly Hash[] | readonly CeloRpcTransaction[]
       },
     ): CeloBlockOverrides & {
-      transactions: Hash[] | CeloTransaction[]
+      transactions: readonly Hash[] | readonly CeloTransaction[]
     } {
       const transactions = args.transactions?.map((transaction) => {
         if (typeof transaction === 'string') return transaction
@@ -50,7 +50,7 @@ export const formatters = {
               }
             : {}),
         }
-      }) as Hash[] | CeloTransaction[]
+      }) as readonly Hash[] | readonly CeloTransaction[]
       return {
         randomness: args.randomness,
         transactions,
