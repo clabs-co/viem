@@ -55,7 +55,7 @@ this is of course not the same as actually building a deposit transaction, which
 
 The changes here are minimal and it come down to 
 
-1. dont add properties to transactions that dont exist on them (ie `feeCurrency` was added to transactions in viem which did not have have )
+1. dont add properties to transactions which dont exist on those transactions (ie `feeCurrency` was added to all transactions in returned from rpc despite only existing on the source in a few)
 
 2. add maxFeePerGas as optional property when it is on the args.
 
