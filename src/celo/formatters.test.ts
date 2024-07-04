@@ -591,6 +591,7 @@ describe('transaction', () => {
         yParity: '0x1',
       }),
     ).toMatchInlineSnapshot(`
+      {
         "accessList": [],
         "blockHash": "0x89644bbd5c8d682a2e9611170e6c1f02573d866d286f006cbf517eec7254ec2d",
         "blockNumber": 1n,
@@ -613,9 +614,10 @@ describe('transaction', () => {
         "type": "cip66",
         "typeHex": "0x7a",
         "v": 1n,
-        "value": 0n,      
-        yParity: '1',
-      `)
+        "value": 0n,
+        "yParity": 1,
+      }
+    `)
 
     expect(
       transaction.format({
@@ -715,12 +717,13 @@ describe('transactionRequest', () => {
 
   test('formatter CIP-42 (removed, should produce CIP-64 when feeCurrency specified, EIP-1559 otherwise)', () => {
     expect(
-      // @ts-expect-error
       transactionRequest.format({
         feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         gas: 1n,
+        // @ts-ignore
         gatewayFee: 4n,
+        // @ts-ignore
         gatewayFeeRecipient: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         maxFeePerGas: 2n,
         maxPriorityFeePerGas: 1n,
@@ -741,11 +744,11 @@ describe('transactionRequest', () => {
     `)
 
     expect(
-      // @ts-expect-error
       transactionRequest.format({
         feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         gas: 1n,
+        // @ts-ignore
         gatewayFeeRecipient: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         maxFeePerGas: 2n,
         maxPriorityFeePerGas: 1n,
@@ -766,12 +769,13 @@ describe('transactionRequest', () => {
     `)
 
     expect(
-      // @ts-expect-error
       transactionRequest.format({
         feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         gas: 1n,
+        // @ts-ignore
         gatewayFee: 4n,
+        // @ts-ignore
         gatewayFeeRecipient: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         maxFeePerGas: 2n,
         maxPriorityFeePerGas: 1n,
@@ -792,12 +796,13 @@ describe('transactionRequest', () => {
     `)
 
     expect(
-      // @ts-expect-error
       transactionRequest.format({
         feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         gas: 1n,
+        // @ts-ignore
         gatewayFee: 4n,
+        // @ts-ignore
         gatewayFeeRecipient: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         maxFeePerGas: 2n,
         maxPriorityFeePerGas: 1n,
@@ -818,12 +823,13 @@ describe('transactionRequest', () => {
     `)
 
     expect(
-      // @ts-expect-error
       transactionRequest.format({
         feeCurrency: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         from: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         gas: 1n,
+        // @ts-ignore
         gatewayFee: 4n,
+        // @ts-ignore
         gatewayFeeRecipient: '0x0f16e9b0d03470827a95cdfd0cb8a8a3b46969b9',
         maxFeePerGas: 2n,
         maxPriorityFeePerGas: 4n,
