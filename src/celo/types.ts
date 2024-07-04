@@ -7,19 +7,19 @@ import type {
   Index,
   Quantity,
   RpcBlock,
+  TransactionType,
   RpcTransaction as core_RpcTransaction,
   RpcTransactionRequest as core_RpcTransactionRequest,
-  TransactionType,
 } from '../types/rpc.js'
 import type {
   AccessList,
-  Transaction as core_Transaction,
   TransactionBase,
-  TransactionRequest as core_TransactionRequest,
   TransactionRequestBase,
   TransactionSerializable,
   TransactionSerializableBase,
   TransactionSerialized,
+  Transaction as core_Transaction,
+  TransactionRequest as core_TransactionRequest,
 } from '../types/transaction.js'
 import type { Assign, ExactPartial, OneOf } from '../types/utils.js'
 
