@@ -1,5 +1,4 @@
 import type { ChainFormatters } from '../types/chain.js'
-import type { Hash } from '../types/misc.js'
 import type { RpcTransaction } from '../types/rpc.js'
 import { hexToBigInt } from '../utils/encoding/fromHex.js'
 import { numberToHex } from '../utils/encoding/toHex.js'
@@ -10,7 +9,8 @@ import {
 } from '../utils/formatters/transaction.js'
 import { defineTransactionRequest } from '../utils/formatters/transactionRequest.js'
 import type {
-  CeloBlockOverrides,
+  CeloBlock,
+  CeloRpcBlock,
   CeloRpcTransaction,
   CeloRpcTransactionRequest,
   CeloTransaction,
@@ -20,18 +20,13 @@ import { isCIP64, isCIP66 } from './utils.js'
 
 export const formatters = {
   block: /*#__PURE__*/ defineBlock({
-    exclude: ['difficulty', 'gasLimit', 'mixHash', 'nonce', 'uncles'],
-    format(
-      args: CeloBlockOverrides & {
-        transactions: readonly Hash[] | readonly CeloRpcTransaction[]
-      },
-    ): CeloBlockOverrides & {
-      transactions: readonly Hash[] | readonly CeloTransaction[]
-    } {
+    format(args: CeloRpcBlock): CeloBlock {
       const transactions = args.transactions?.map((transaction) => {
         if (typeof transaction === 'string') return transaction
+        const formatted = formatTransaction(transaction as RpcTransaction)
+
         return {
-          ...formatTransaction(transaction as RpcTransaction),
+          ...formatted,
           ...(transaction.maxFeeInFeeCurrency
             ? {
                 maxFeeInFeeCurrency:
@@ -40,25 +35,31 @@ export const formatters = {
                     : transaction.maxFeeInFeeCurrency,
               }
             : {}),
-          feeCurrency: transaction.feeCurrency,
-          ...(transaction.type !== '0x7b'
+          ...(transaction.gatewayFee
             ? {
-                gatewayFee: transaction.gatewayFee
-                  ? hexToBigInt(transaction.gatewayFee)
-                  : null,
-                gatewayFeeRecipient: transaction.gatewayFeeRecipient || null,
+                gatewayFee: hexToBigInt(transaction.gatewayFee),
+                gatewayFeeRecipient: transaction.gatewayFeeRecipient,
               }
             : {}),
+          feeCurrency: transaction.feeCurrency,
         }
-      }) as readonly Hash[] | readonly CeloTransaction[]
+      })
       return {
-        randomness: args.randomness,
         transactions,
-      }
+        ...(args.randomness ? { randomness: args.randomness } : {}),
+      } as CeloBlock
     },
   }),
   transaction: /*#__PURE__*/ defineTransaction({
     format(args: CeloRpcTransaction): CeloTransaction {
+      if (args.type === '0x7e')
+        return {
+          isSystemTx: args.isSystemTx,
+          mint: args.mint ? hexToBigInt(args.mint) : undefined,
+          sourceHash: args.sourceHash,
+          type: 'deposit',
+        } as CeloTransaction
+
       const transaction = { feeCurrency: args.feeCurrency } as CeloTransaction
 
       if (args.type === '0x7a') {
@@ -80,12 +81,9 @@ export const formatters = {
       return transaction
     },
   }),
-
   transactionRequest: /*#__PURE__*/ defineTransactionRequest({
     format(args: CeloTransactionRequest): CeloRpcTransactionRequest {
-      const request = {
-        feeCurrency: args.feeCurrency,
-      } as CeloRpcTransactionRequest
+      const request = {} as CeloRpcTransactionRequest
 
       if (isCIP66(args)) {
         request.type = '0x7a'
@@ -96,6 +94,8 @@ export const formatters = {
       } else if (isCIP64(args)) {
         request.type = '0x7b'
       }
+
+      if (args.feeCurrency) request.feeCurrency = args.feeCurrency
 
       return request
     },
