@@ -21,7 +21,6 @@ export const fees: ChainFees<typeof formatters> = {
     params: ChainEstimateFeesPerGasFnParameters<typeof formatters>,
   ) => {
     if (!params.request?.feeCurrency) return null
-    // TODO check if multiply is noe empty?
 
     const [maxFeePerGas, maxPriorityFeePerGas] = await Promise.all([
       estimateFeePerGasInFeeCurrency(params.client, params.request.feeCurrency),
