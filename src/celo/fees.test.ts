@@ -45,9 +45,11 @@ describe('celo/fees', () => {
       },
     } as any)
 
+    // The fees maxFeePerGas is calculated as (baseFee * multiplier) + maxPriorityFeePerGas
+    // Which is ((15057755162-602286) * 150 / 100) + 602286 = 22586331600
     expect(fees).toMatchInlineSnapshot(`
         {
-          "maxFeePerGas": 22587235029n,
+          "maxFeePerGas": 22586331600n,
           "maxPriorityFeePerGas": 602286n,
         }
       `)
