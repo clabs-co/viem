@@ -30,7 +30,7 @@ export const fees: ChainFees<typeof formatters> = {
       ),
     ])
 
-    const adjustedBasFee = params.multiply(maxFeePerGas-maxPriorityFeePerGas)
+    const adjustedBasFee = params.multiply(maxFeePerGas - maxPriorityFeePerGas)
 
     return {
       maxFeePerGas: adjustedBasFee + maxPriorityFeePerGas,
