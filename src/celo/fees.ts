@@ -4,7 +4,6 @@ import type {
   ChainEstimateFeesPerGasFnParameters,
   ChainFees,
   Hex,
-  PublicClient,
 } from '../index.js'
 import type { formatters } from './formatters.js'
 
