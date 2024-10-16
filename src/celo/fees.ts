@@ -9,7 +9,7 @@ import type { formatters } from './formatters.js'
 
 type RequestGetCodeParams = {
   Method: 'eth_getCode'
-  Parameters: [Address]
+  Parameters: [Address, 'latest']
   ReturnType: Hex
 }
 /*
@@ -20,7 +20,7 @@ const isCel2 = async (client: Client) => {
   const proxyAdminAddress = '0x4200000000000000000000000000000000000018'
   const code = await client.request<RequestGetCodeParams>({
     method: 'eth_getCode',
-    params: [proxyAdminAddress],
+    params: [proxyAdminAddress, 'latest'],
   })
   if (typeof code === 'string') {
     return code != '0x' && code.length > 2
