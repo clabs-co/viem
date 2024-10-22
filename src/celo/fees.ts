@@ -51,7 +51,7 @@ export const fees: ChainFees<typeof formatters> = {
       ),
     ])
 
-    let maxFeePerGas: bigint;
+    let maxFeePerGas: bigint
     if (await isCel2(params.client)) {
       // eth_gasPrice for cel2 returns baseFeePerGas + maxPriorityFeePerGas
       maxFeePerGas =
