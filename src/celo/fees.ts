@@ -23,7 +23,7 @@ const isCel2 = async (client: Client) => {
     params: [proxyAdminAddress, 'latest'],
   })
   if (typeof code === 'string') {
-    return code != '0x' && code.length > 2
+    return code !== '0x' && code.length > 2
   }
   return false
 }
@@ -51,7 +51,7 @@ export const fees: ChainFees<typeof formatters> = {
       ),
     ])
 
-    let maxFeePerGas
+    let maxFeePerGas: bigint;
     if (await isCel2(params.client)) {
       // eth_gasPrice for cel2 returns baseFeePerGas + maxPriorityFeePerGas
       maxFeePerGas =
