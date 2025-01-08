@@ -1,5 +1,15 @@
 # viem
 
+## 2.22.5
+
+### Patch Changes
+
+- [#3101](https://github.com/wevm/viem/pull/3101) [`e934c8b4f159952aaa5dd1f310cc249f9a298c57`](https://github.com/wevm/viem/commit/e934c8b4f159952aaa5dd1f310cc249f9a298c57) Thanks [@lethaale](https://github.com/lethaale)! - Added ENS contract addresses to Berachain bArtio.
+
+- [#3203](https://github.com/wevm/viem/pull/3203) [`8c0597dbfb9b617aee72db6f8f9d13a9c4de4fbe`](https://github.com/wevm/viem/commit/8c0597dbfb9b617aee72db6f8f9d13a9c4de4fbe) Thanks [@bthaile](https://github.com/bthaile)! - Updated Flow Mainnet and Testnet block explorer URLs.
+
+- [#3207](https://github.com/wevm/viem/pull/3207) [`b87dd30ef8a0d07de7f553ef0b69892e787e19d7`](https://github.com/wevm/viem/commit/b87dd30ef8a0d07de7f553ef0b69892e787e19d7) Thanks [@metarsit](https://github.com/metarsit)! - Updated Abstract Testnet block explorer to use etherscan.
+
 ## 2.22.4
 
 ### Patch Changes
